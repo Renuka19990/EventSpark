@@ -24,20 +24,26 @@ const categoryEnum = [
 
 const EventSchema = new mongoose.Schema(
   {
-    EventId: { type: Number },
+    eventId: { type: Number },
     title: { type: String, required: true },
     description: { type: String, required: true },
     eventDate: { type: Date, required: true },
     organizer: { type: Number, required: true },
     category: { type: String, enum: categoryEnum, required: true },
-    roles: { type: String, enum: ["user", "admin"], default: "user" },
     imageUrl: { type: String },
+    eventPlaner:{type:String},
     pinCode: { type: Number, required: true },
     location: { type: String, required: true },
-    ticketTypes: [{ type: String, enum: ["Gold", "Silver", "Bronze"] }],
+    ticketTypes: {
+      type: [{ type: String, enum:  ["Gold", "Silver", "Bronze"] }],
+      default: function () {
+          return ["Bronze"];
+      }
   },
+},
   { versionKey: false }
 );
+
 
 const eventModel = mongoose.model("event", EventSchema);
 

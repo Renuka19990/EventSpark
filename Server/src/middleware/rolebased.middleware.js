@@ -1,8 +1,9 @@
 const access=(...roles)=>{
     return (req,res,next)=>{
-      const userRole=req.roles;
-      const hasCommonRole = userRole.some(role => roles.includes(role));
+      const userRole=req.role;
+      const hasCommonRole = roles.includes(userRole);
       if(hasCommonRole){
+        console.log("access granted");
         next();
       }else{
         res.status(403).json({error:"Access forbidden"});

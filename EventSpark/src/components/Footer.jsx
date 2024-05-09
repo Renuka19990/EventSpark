@@ -11,7 +11,7 @@ import {
     Image,
     useColorModeValue,
   } from '@chakra-ui/react';
-  import logo from '../assets/logo.png';
+  import logo from '../assets/darl_bg.png';
   
   const Logo = () => {
     return (
@@ -32,8 +32,8 @@ import {
   export default function Footer() {
     return (
       <Box
-        bg="#1E0A3C" // Set background color to #1E0A3C
-        color="white" // Set text color to white
+        bg="#1E0A3C" 
+        color="white" 
       >
         <Container as={Stack} maxW={'6xl'} py={10}>
           <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import logo from '../assets/logo.jpeg'
+import logo from '../assets/logo.png'
 import {
   Box,
   Flex,

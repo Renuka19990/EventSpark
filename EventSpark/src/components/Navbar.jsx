@@ -95,30 +95,27 @@ export default function Navbar() {
           direction={'row'}
           spacing={6}>
           <Button
-            ms={5}
-            as={'a'}
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'xl'}
-            fontWeight={600}
-            color={'white'}
-            bg={'blue.500'}
-            href={'#'}
             _hover={{
-              bg: 'blue.300',
-            }}>
+              color: 'gray.600',
+            }}
+            ml={7}
+            as={'a'}
+            fontSize={'xl'}
+            fontWeight={700}
+            variant={'link'}
+            href={'#'}>
             Log In
           </Button>
           <Button
-            as={'a'}
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'xl'}
-            fontWeight={600}
-            color={'white'}
-            bg={'blue.500'}
-            href={'#'}
             _hover={{
-              bg: 'blue.300',
-            }}>
+              color: 'gray.600',
+            }}
+            ml={7}
+            as={'a'}
+            fontSize={'xl'}
+            fontWeight={700}
+            variant={'link'}
+            href={'#'}>
             Sign Up
           </Button>
         </Stack>

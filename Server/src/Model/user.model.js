@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
   dateOfBirth: { type: Date },
   profilePicture: { type: String },
   role: { type: String, enum: ["user", "admin", "eventPlanner"], default: "user" },
-  eventsBooked: { type: [Number], default: [] }
+  eventsBooked: { type: [Number], default: [] },
+  isDisabled: { type: Boolean, default:false}
 });
 
 const UserModel = mongoose.model("User", userSchema);

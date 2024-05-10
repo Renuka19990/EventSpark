@@ -1,6 +1,7 @@
 const express = require("express");
-const { eventModel } = require("../Model/event.model");
+
 const { UserModel } = require("../Model/user.model");
+const { eventModel } = require("../Model/event.model");
 
 const adminRoute = express.Router();
 
@@ -206,7 +207,7 @@ adminRoute.patch("/users/:userId", async (req, res) => {
 
 
 
-userRoute.get("/users", async (req, res) => {
+adminRoute.get("/users", async (req, res) => {
   try {
     const { username } = req.query;
     let query = {};
@@ -224,7 +225,7 @@ userRoute.get("/users", async (req, res) => {
 
 
 
-userRoute.delete("/users/:userID", async (req, res) => {
+adminRoute.delete("/users/:userID", async (req, res) => {
   const { userID } = req.params;
   try {
     const deletedUser = await UserModel.findOneAndDelete({ userID: userID });
@@ -239,4 +240,6 @@ userRoute.delete("/users/:userID", async (req, res) => {
   }
 });
 
-module.exports = userRoute;
+module.exports = {
+  adminRoute
+};

@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   dateOfBirth: { type: Date },
   profilePicture: { type: String },
   role: { type: String, enum: ["user", "admin", "eventPlanner"], default: "user" },
-  eventsBooked: [Number] 
+  eventsBooked: { type: [Number], default: [] }
 });
 
 const UserModel = mongoose.model("User", userSchema);

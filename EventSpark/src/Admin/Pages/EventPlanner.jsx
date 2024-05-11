@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function User() {
+export default function EventPlanner() {
   return (
     <div>
-      <h1>hello</h1>
+      
     </div>
   )
 }

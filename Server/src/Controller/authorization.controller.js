@@ -139,6 +139,17 @@ const forgotPassword = async (req, res) => {
   }
 };
 
-module.exports = { SignUp, logIn, veriFyOtp, forgotPassword };
+const logout = async (req, res) => {
+  const token = req.headers["authorization"].split(" ")[1];
+  try {
+      const blacklistToken = new Blacklist({ token });
+      await blacklistToken.save();
+      res.status(201).send("User logout successfully");
+  } catch (error) {
+      res.status(400).json({ msg: error.message });
+  }
+}
+
+module.exports = { SignUp, logIn, veriFyOtp, forgotPassword,logout };
 
 

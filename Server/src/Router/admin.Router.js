@@ -1,17 +1,21 @@
 const express = require("express");
 const { deleteUser, updateUser, userData, getUsers, AddUser } = require("../Controller/admin.controller");
+const { access } = require("../middleware/rolebased.middleware");
+const { auth } = require("../middleware/auth.middleare");
 
 
 const adminRouter = express.Router();
 
-adminRouter.post("/add", AddUser);
+adminRouter.post("/add",auth,access("admin"), AddUser);
 
-adminRouter.get("/users", getUsers);
+adminRouter.get("/users",auth,access("admin"), getUsers);
 
-adminRouter.get("/user/:id", userData);
+adminRouter.get("/user/:id",auth,access("admin"), userData);
 
-adminRouter.patch("/users", updateUser);
+adminRouter.patch("/user",auth,access("admin"), updateUser);
 
-adminRouter.delete("/users", deleteUser);
+adminRouter.delete("/user",auth,access("admin"), deleteUser);
 
 module.exports = { adminRouter };
+
+ 

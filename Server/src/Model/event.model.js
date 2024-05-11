@@ -32,10 +32,10 @@ const EventSchema = new mongoose.Schema(
     category: { type: String, enum: categoryEnum, required: true },
     imageUrl: { type: String },
     eventPlaner:{type:String},
-    pinCode: { type: Number, required: true },
+    Price:{type:Number,required:true},
     location: { type: String, required: true },
     ticketTypes: {
-      type: [{ type: String, enum:  ["Gold", "Silver", "Bronze"] }],
+    type: [{ type: String, enum:  ["Gold", "Silver", "Bronze"] }],
       default: function () {
           return ["Bronze"];
       }

@@ -66,7 +66,7 @@ const logIn = async (req, res) => {
       if (err) throw new Error(err);
       if (result) {
         const token = jwt.sign(
-          { email, role: user.role, userID: user.userID },
+          { email, role: user.role, userID: user.userID,username:user.username },
           process.env.SECRET_KEY,
           { expiresIn: "1h" }
         );

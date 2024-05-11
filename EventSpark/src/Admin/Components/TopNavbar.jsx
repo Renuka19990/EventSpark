@@ -20,6 +20,8 @@ const TopNavBar = () => {
     borderBottomWidth="1px"
     borderColor={useColorModeValue('black', 'gray.700')}
     color={useColorModeValue('white', 'gray.200')}
+    position={"sticky"}
+    top={0}
   >
    <Image style={{ height: "80px" }} src={logo}/>
   <Flex gap={5 } justifyContent={"flex-end"}>

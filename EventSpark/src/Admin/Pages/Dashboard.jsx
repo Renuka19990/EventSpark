@@ -66,21 +66,21 @@ export default function Dashboard() {
         <StatsCard
           title={'Users'}
           stat={'5,000'}
-          icon={<BsPerson size={'3em'} />}
+          icon={<BsPerson size={'1em'} />}
         />
         <StatsCard
           title={'Events'}
           stat={'1,000'}
-          icon={<FiServer size={'3em'} />}
+          icon={<FiServer size={'1em'} />}
         />
         <StatsCard
           title={'EventPlanner'}
           stat={'7'}
-          icon={<FiUsers size={'3em'} />}
+          icon={<FiUsers size={'1em'} />}
         />
       </SimpleGrid>
-      <TableContainer>
-      <Table variant='striped' colorScheme='teal'>
+      <TableContainer mt={6}>
+      <Table variant='striped'>
         <TableCaption>Imperial to metric conversion factors</TableCaption>
         <Thead>
           <Tr>

@@ -6,7 +6,8 @@ const { userRouter } = require("./src/Router/user.route");
 const { authRouter } = require("./src/Router/authorization.router");
 const { auth } = require("./src/middleware/auth.middleare");
 const { access } = require("./src/middleware/rolebased.middleware");
-const { adminRoute } = require("./src/Router/admin.route");
+const { adminRouter } = require("./src/Router/admin.Router");
+
 
 const PORT = 8080 || process.env.PORT;
 const app = express();
@@ -14,7 +15,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/", authRouter);
-app.use('/admin',adminRoute);
+app.use('/admin',adminRouter);
+
+// app.use("/admin", authRouter);
 
 app.get("/get", auth, access("user"), async (req, res) => {
   // const books=await bookModel.find();

@@ -10,8 +10,10 @@ adminRouter.get("/users", getUsers);
 
 adminRouter.get("/user/:id", userData);
 
-adminRouter.patch("/users", updateUser);
+adminRouter.patch("/user", updateUser);
 
-adminRouter.delete("/users", deleteUser);
+adminRouter.delete("/user", deleteUser);
 
 module.exports = { adminRouter };
+
+ 

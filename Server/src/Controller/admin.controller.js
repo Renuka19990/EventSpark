@@ -8,7 +8,6 @@ const getUsers=async(req,res)=>{
     const { minAge, maxAge, sort, search } = req.query;
     const query = {};
     
-
     //Age Filtration
     if (minAge && maxAge) {
         query.age = { $gte: minAge, $lte: maxAge };
@@ -70,6 +69,7 @@ const userData=async(req,res)=>{
         res.status(404).json({error:true,message:error});
     }
 }
+
 
 //For Updating the User
 const updateUser=async(req,res)=>{

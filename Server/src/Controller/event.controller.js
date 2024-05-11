@@ -177,11 +177,14 @@ const addEvent =async (req, res) => {
 
 
 //for updating events
+
+
+
 const updateEvent = async (req, res) => {
     const { id } = req.params;
     const eventId=id;
     try {
-        const updatedEvent = await EventModel.findOneAndUpdate({ eventId: eventId }, req.body, { new: true });        if (!updatedEvent) {
+        const updatedEvent = await eventModel.findOneAndUpdate({ eventId: eventId }, req.body, { new: true });        if (!updatedEvent) {
             return res.status(404).json({ success: false, message: "Event not found" });
         }
         res.status(200).json({ success: true, event: updatedEvent });

@@ -1,3 +1,4 @@
+const { eventModel } = require("../Model/event.model");
 const { UserModel } = require("../Model/user.model");
 
 //for getting All USers User
@@ -53,9 +54,7 @@ const getUsers=async(req,res)=>{
     }
 }
 
-
 //for getting Particular User Based On userID
-
 const userData=async(req,res)=>{
     const { id } = req.params;
     try{
@@ -88,6 +87,7 @@ const updateUser=async(req,res)=>{
     }
 }
 
+
 //for Deleting the User
 const deleteUser=async(req,res)=>{
     const { id } = req.params;
@@ -96,6 +96,7 @@ const deleteUser=async(req,res)=>{
     if(!userData){
         return res.status(404).json({error:true,msg:"User  Not Found So We Can't Update it"});
     }
+    await eventModel.deleteMany({ organizer: id });
     await UserModel.findOneAndDelete({userID:id});
     return res.status(200).json({ error: false,msg:"user Deleted Successfully"});
     }catch(error){
@@ -104,8 +105,8 @@ const deleteUser=async(req,res)=>{
     }
 }
 
-//For Adding users in db by admin
 
+//For Adding users in db by admin
 const AddUser = async (req, res) => {
     const {
       userID,
@@ -155,6 +156,6 @@ const AddUser = async (req, res) => {
       });
     }
   };
-  
+
 
 module.exports={deleteUser,updateUser,userData,getUsers,AddUser};

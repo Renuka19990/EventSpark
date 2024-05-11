@@ -6,6 +6,7 @@ const { authRouter } = require("./src/Router/authorization.router");
 const { auth } = require("./src/middleware/auth.middleare");
 const { access } = require("./src/middleware/rolebased.middleware");
 const { adminRouter } = require("./src/Router/admin.Router");
+const { eventRoute } = require("./src/Router/event.Router");
 
 const PORT = 8080 || process.env.PORT;
 const app = express();
@@ -16,6 +17,7 @@ app.use("/", authRouter);
 
 app.use("/admin",auth,access("admin"), adminRouter);
 
+app.use("/", eventRoute);
 
 
 app.get("/get", auth, access("user"), async (req, res) => {

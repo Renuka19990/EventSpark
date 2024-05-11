@@ -14,8 +14,8 @@ adminRouter.get("/user/:id",auth,access("admin"), userData);
 
 adminRouter.patch("/user",auth,access("admin"), updateUser);
 
-adminRouter.delete("/user",auth,access("admin"), deleteUser);
-
+adminRouter.delete("/delete/:id",auth,access("admin"), deleteUser);
+//auth,access("admin")
 module.exports = { adminRouter };
 
  

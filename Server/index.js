@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use("/", authRouter);
 
-app.use("/admin",auth,access("admin"), adminRouter);
+app.use("/admin", adminRouter);
 
 app.use("/", eventRoute);
 

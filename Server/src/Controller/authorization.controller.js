@@ -5,7 +5,6 @@ require("dotenv").config();
 
 const SignUp = async (req, res) => {
   const {
-    userID,
     username,
     email,
     role,
@@ -22,6 +21,14 @@ const SignUp = async (req, res) => {
         .status(401)
         .json({ msg: "User is already registered. Please try to login." });
     }
+    const users=await UserModel.find();
+        let id=1;
+        if(users&&users.length>0){
+          users.sort((a, b) => a.userID - b.userID)
+             id=users[users.length-1].userID;
+             id=id+1;
+        }
+    const userID=id;
     const hashedPassword = await bcrypt.hash(password, 10);
     const dob = new Date(dateOfBirth);
     const age = Math.floor((new Date() - dob) / (365.25 * 24 * 60 * 60 * 1000));

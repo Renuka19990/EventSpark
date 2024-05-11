@@ -105,21 +105,76 @@ const event=async(req,res)=>{
 // POST route to add a new event
 const addEvent =async (req, res) => {
     try {
-        const {title,description,eventDate,organizer,category,imageUrl,eventPlaner,Price,pinCode,location,ticketTypes}=req.body;
+        const {title,description,eventDate,category,imageUrl,mode,time,eventPlaner,Price,location,ticketTypes}=req.body;
         const events=await eventModel.find();
-        events.sort((a, b) => a.eventId - b.eventId);
-        const id=events[events.length-1].eventId;
-        const eventId=id+1;
-        const newEvent = new EventModel({eventId,title,description,eventDate,organizer:req.username,category,imageUrl,eventPlaner,Price,location,ticketTypes});
+        let id=1;
+        if(events&&events.length>0){
+            events.sort((a, b) => a.eventId - b.eventId)
+             id=events[events.length-1].eventId;
+             id=id+1;
+        }
+        const eventId=id;
+        const organizer=req.username;
+        const newEvent = new eventModel({eventId,title,description,eventDate,mode,time,organizer,category,imageUrl,eventPlaner,Price,location,ticketTypes});
         const savedEvent = await newEvent.save();
-
+        const Planner= await UserModel.findOneAndUpdate({ username: eventPlaner }, { $push: { eventsPlanned: eventId } }, { new: true }); 
         const user = await UserModel.findOneAndUpdate({ userID: req.userID }, { $push: { eventsBooked: eventId } }, { new: true }); 
-        res.status(201).json({ success: true, event: savedEvent });
-    } catch (error) {
+        res.status(201).json({ success: true, event: savedEvent });    
+    }catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: "Not able to add Event" });
     }
 };
+
+// const addEvent = async (req, res) => {
+//     try {
+//         const { title, description, eventDate, category, imageUrl, eventPlaner, Price, location, ticketTypes } = req.body;
+
+//         const events = await eventModel.find();
+//         let eventId = 1;
+
+//         if (events.length > 0) {
+//             events.sort((a, b) => b.eventId - a.eventId);
+//             eventId = events[0].eventId + 1;
+//         }
+
+//         const organizer = req.username;
+//         const newEvent = new eventModel({
+//             eventId,
+//             title,
+//             description,
+//             eventDate,
+//             organizer,
+//             category,
+//             imageUrl,
+//             eventPlaner,
+//             Price,
+//             location,
+//             ticketTypes
+//         });
+
+//         const savedEvent = await newEvent.save();
+
+//         const planner = await UserModel.findOneAndUpdate(
+//             { username: eventPlaner },
+//             { $push: { eventsPlanned: eventId } },
+//             { new: true }
+//         );
+
+//         const user = await UserModel.findOneAndUpdate(
+//             { userID: req.userID },
+//             { $push: { eventsBooked: eventId } },
+//             { new: true }
+//         );
+
+//         res.status(201).json({ success: true, event: savedEvent });
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ success: false, message: "Unable to add event" });
+//     }
+// };
+
+
 
 //for updating events
 const updateEvent = async (req, res) => {
@@ -149,7 +204,7 @@ const deleteEvent = async (req, res) => {
             await user.save();
         }
 
-        const deletedEvent = await EventModel.findOneAndDelete({ eventId: eventId });        
+        const deletedEvent = await eventModel.findOneAndDelete({ eventId: eventId });        
         if (!deletedEvent) {
             return res.status(404).json({ success: false, message: "Event not found" });
         }

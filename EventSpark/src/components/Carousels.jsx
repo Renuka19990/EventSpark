@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import Slider from "react-slick";
-import ElegantButton from "./Button"; // Path to ElegantButton component
+// import ElegantButton from "./Button"; 
 
 const settings = {
   dots: true,
@@ -139,7 +139,7 @@ export default function Carousel() {
       </Slider>
       {/* Button at the middle bottom */}
       <Box position="absolute" bottom="20px" left="50%" transform="translateX(-50%)">
-        <ElegantButton />
+        {/* <ElegantButton /> */}
       </Box>
     </Box>
   );

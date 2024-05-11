@@ -14,6 +14,8 @@ app.use(express.json());
 
 app.use("/", authRouter);
 
+app.use("/admin", authRouter);
+
 app.get("/get", auth, access("user"), async (req, res) => {
   // const books=await bookModel.find();
   res.send("let it go");

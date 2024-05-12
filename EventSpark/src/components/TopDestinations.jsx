@@ -86,7 +86,7 @@ const TopDestinationsIndia = () => {
       overflow="hidden"
       position="relative"
     >
-      <Heading as="h1" size="3xl" mb={8} color="gray.500" className="text-center mt-12">
+      <Heading as="h1" size="xl"  color="blue.400" className="text-center ">
         Top Destinations in India ✨
       </Heading>
       <Flex
@@ -99,14 +99,14 @@ const TopDestinationsIndia = () => {
         {destinations.map((dest, index) => (
           <Box
             key={dest.name}
-            w={isSmallerScreen ? "240px" : "320px"}
-            h={isSmallerScreen ? "320px" : "400px"}
+            w={isSmallerScreen ? "240px" : "300px"}
+            h={isSmallerScreen ? "320px" : "320px"}
             className="shadow-lg rounded-md overflow-hidden transform transition-transform duration-300 hover:scale-105 "
             mr={4}
             style={{ flexShrink: 0 }}
             borderBottom="10px solid rgb(240,85,55)"
             _hover={{
-              borderBottomWidth: "70px",
+              borderBottomWidth: "100px",
               transition: "border-bottom-width 0.4s ease-in-out",
             }}
           >

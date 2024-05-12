@@ -43,7 +43,7 @@ const TrendingEvents = () => {
 
   return (
     <Box p={isSmallerScreen?4:32} className="container mx-auto">
-      <Heading as="h1" size="xl" mb={6} color="gray.500" className="text-center mt-4">
+      <Heading as="h1" size="xl"  color="blue.400" className="text-center ">
         Trending Events 🎉
       </Heading>
 

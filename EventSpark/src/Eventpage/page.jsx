@@ -6,10 +6,10 @@ import Navbar from "../components/Navbar";
 export const EventPage = () => {
     return (
         <>
-      <Container maxW={'7xl'}>
+      {/* <Container maxW={'9xl'}> */}
          <VideoTextComponent/>
         <EventsNav/>
-      </Container>
+      {/* </Container> */}
         </>
     );
   };

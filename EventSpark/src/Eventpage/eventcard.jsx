@@ -49,7 +49,7 @@ export function EventsCard({event}) {
     
     return (
             <Box 
-                maxW={"290px"}
+                maxW={"350px"}
                 w={"full"}
                 bg={useColorModeValue("white", "gray.900")}
                 boxShadow={"2xl"}
@@ -246,7 +246,7 @@ export const EventsNav = () => {
     };
 
     return (
-        <Container maxW={"7xl"}>
+        <Container maxW={"8xl"}>
             <Flex flexDirection={"column"} rowGap={5}>
             <Flex justifyContent="space-between" alignItems="center" display={{ base: 'none', lg: 'flex' }} >
                     <Input
@@ -321,7 +321,7 @@ export const EventsNav = () => {
                         bg={useColorModeValue("white", "gray.800")}
                         p={4}
                         pl={0}
-                        columnGap={7}
+                        columnGap={9}
                         justifyContent="center"
                         alignItems="center"
                         display={{ base: 'none', lg: 'flex' }}
@@ -333,6 +333,7 @@ export const EventsNav = () => {
                                 color={activeCategory === category ? 'blue.500' : 'inherit'}
                                 cursor="pointer"
                                 mr={4}
+                                fontSize={"18px"}
                                 _hover={{
                                     textDecoration: 'underline',
                                     color: 'blue.500',

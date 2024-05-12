@@ -14,7 +14,7 @@ import {
 
   export function VideoTextComponent() {
     return (
-      <Container maxW={'7xl'}>
+      <Container maxW={'8xl'}>
         <Stack
           align={'center'}
           spacing={{ base: 8, md: 10 }}

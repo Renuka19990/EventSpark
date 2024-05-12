@@ -277,7 +277,7 @@ const MobileNavItem = ({ label, children, href }) => {
 const NAV_ITEMS = [
   {
     label: "Find Events",
-    href: "#",
+    href: "/events",
   },
   {
     label: "Create Events",

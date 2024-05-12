@@ -1,6 +1,5 @@
 import { Route, Routes, useLocation } from "react-router-dom"
 import HomePage from "../pages/HomePage"
-import FindEvents from "../pages/FindEvents"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import CreateEvent from "../pages/CreateEvent"
@@ -10,6 +9,7 @@ import Dashboard from "../Admin/Pages/Dashboard"
 import Events from "../Admin/Pages/Events"
 import User from "../Admin/Pages/User"
 import EventPlanner from "../Admin/Pages/EventPlanner"
+import { EventPage } from "../Eventpage/page"
 
 const AllRoutes = () => {
   const hideNavbarPaths = [
@@ -28,7 +28,7 @@ const AllRoutes = () => {
      {!isAdminRoute&& <Navbar/>}
       <Routes>
         <Route path="/" element={<HomePage/>}/>
-        <Route path="/findevent" element={<FindEvents/>}/>
+        <Route path="/events" element={<EventPage/>}/>
         <Route path="/createevents" element={<CreateEvent/>}/>
         <Route path="/authentication" element={<Authentication/>}/>
         <Route path="/admin" element={<AdminPage />}>

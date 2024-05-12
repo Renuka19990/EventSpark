@@ -1,8 +1,9 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
   Box,
   Button,
   chakra,
-  Flex,
   SimpleGrid,
   Stat,
   StatLabel,
@@ -12,27 +13,27 @@ import {
   TableContainer,
   Tbody,
   Td,
-  Tfoot,
-  Th,
   Thead,
+  Th,
   Tr,
-  useColorModeValue,
+  useToast,
+  Image,
 } from '@chakra-ui/react';
 import { BsPerson } from 'react-icons/bs';
-import { FiServer, FiUsers, FiUserX } from 'react-icons/fi';
-import { GoLocation } from 'react-icons/go';
+import { FiServer, FiUsers } from 'react-icons/fi';
 
-function StatsCard(props) {
-  const { title, stat, icon } = props;
+const API_URL = 'http://localhost:8080';
+
+function StatsCard({ title, stat, icon }) {
   return (
     <Stat
       px={{ base: 2, md: 4 }}
       py={'5'}
       shadow={'xl'}
       border={'1px solid'}
-      borderColor={useColorModeValue('gray.800', 'gray.500')}
+      borderColor={'gray.300'}
       rounded={'lg'}>
-      <Flex justifyContent={'space-between'}>
+      <Box display={'flex'} justifyContent={'space-between'}>
         <Box pl={{ base: 2, md: 4 }}>
           <StatLabel fontWeight={'medium'} isTruncated>
             {title}
@@ -41,116 +42,102 @@ function StatsCard(props) {
             {stat}
           </StatNumber>
         </Box>
-        <Box
-          my={'auto'}
-          color={useColorModeValue('gray.800', 'gray.200')}
-          alignContent={'center'}>
+        <Box my={'auto'} color={'gray.500'} alignContent={'center'}>
           {icon}
         </Box>
-      </Flex>
+      </Box>
     </Stat>
   );
 }
 
-export default function Dashboard() {
+function Dashboard() {
+  const [users, setUsers] = useState([]);
+  const [events, setEvents] = useState([]);
+  const toast = useToast();
+
+  useEffect(() => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTUyMDIyNywiZXhwIjoxNzE1NTIzODI3fQ.9Ap1aJWH0AhJSu-vgkDrwBBD_Cbx_MRnq3-Qdfft_cE"; // Ensure token is retrieved securely and correctly
+    Promise.all([
+      axios.get(`${API_URL}/admin/users`, {
+        headers: { Authorization: `Bearer ${token}` }
+      }),
+      axios.get(`${API_URL}/events`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+    ]).then(([usersResponse, eventsResponse]) => {
+      setUsers(usersResponse.data.users);
+      setEvents(eventsResponse.data.events);
+    }).catch((error) => {
+      toast({
+        title: 'Error fetching data',
+        description: error.message || 'Failed to fetch data',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    });
+  }, []);
+
+  const mergeData = () => {
+    return events.map(event => {
+      const user = users.find(user => user.eventsBooked.includes(event.eventId));
+      return {
+        ...event,
+        userProfile: user ? user.profilePicture : 'default_image_url',
+        userName: user ? user.username : 'N/A'
+      };
+    });
+  }
+
+  const mergedData = mergeData();
+
   return (
-    <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
-      <chakra.h1
-        textAlign={'left'}
-        fontSize={'4xl'}
-        py={10}
-        fontWeight={'bold'}>
-      Dashboard
+    <Box maxW="7xl" mx="auto" pt={5} px={{ base: 2, sm: 12, md: 17 }}>
+      <chakra.h1 textAlign="left" fontSize="4xl" py={10} fontWeight="bold">
+        Dashboard
       </chakra.h1>
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
-        <StatsCard
-          title={'Users'}
-          stat={'5,000'}
-          icon={<BsPerson size={'1em'} />}
-        />
-        <StatsCard
-          title={'Events'}
-          stat={'1,000'}
-          icon={<FiServer size={'1em'} />}
-        />
-        <StatsCard
-          title={'EventPlanner'}
-          stat={'7'}
-          icon={<FiUsers size={'1em'} />}
-        />
-      </SimpleGrid>
-      <TableContainer mt={6}>
-      <Table variant='striped'>
-        <TableCaption>Imperial to metric conversion factors</TableCaption>
-        <Thead>
-          <Tr>
-            <Th>UserID</Th>
-            <Th>EventID</Th>
-            <Th>Event Planner</Th>
-            <Th>Category</Th>
-            <Th>Edit</Th>
-            <Th>Delete</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          <Tr>
-            <Td>1</Td>
-            <Td>101</Td>
-            <Td>John Doe</Td>
-            <Td>Conference</Td>
-            <Td><Button colorScheme='blue'>Edit</Button></Td>
-            <Td><Button colorScheme='red'>Delete</Button></Td>
-          </Tr>
-          <Tr>
-            <Td>2</Td>
-            <Td>102</Td>
-            <Td>Jane Smith</Td>
-            <Td>Seminar</Td>
-            <Td><Button colorScheme='blue'>Edit</Button></Td>
-            <Td><Button colorScheme='red'>Delete</Button></Td>
-          </Tr>
-          <Tr>
-            <Td>3</Td>
-            <Td>103</Td>
-            <Td>Emily Johnson</Td>
-            <Td>Workshop</Td>
-            <Td><Button colorScheme='blue'>Edit</Button></Td>
-            <Td><Button colorScheme='red'>Delete</Button></Td>
-          </Tr>
-        </Tbody>
-       
-      </Table>
-    </TableContainer>
+        <StatsCard title="Total Users" stat={users.length} icon={<BsPerson size="1em" />} />
+        <StatsCard title="Total Events" stat={events.length} icon={<FiServer size="1em" />} />
+        <StatsCard 
+  title="Active Event Planners" 
+  stat={users.filter(user => user.role === 'eventPlanner').length} 
+  icon={<FiUsers size="1em" />} 
+/>
 
-    {/* <Box>
-      <Heading as="h2" size="lg" mb={4}>
-        Expenses
-      </Heading>
-      {expenses.length > 0 ? (
-        <Table variant="striped" colorScheme="gray">
+      </SimpleGrid>
+
+      <TableContainer mt={6}>
+        <Table variant="simple" colorScheme="blue">
+          <TableCaption>Integrated Details of Users and Events</TableCaption>
           <Thead>
             <Tr>
-              <Th>Title</Th>
-              <Th>Description</Th>
-              <Th>Amount</Th>
-              <Th>Date</Th>
+              <Th>Event Title</Th>
+              <Th>Username</Th>
+              <Th>Profile Picture</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {expenses.map((expense) => (
-              <Tr key={expense.id}>
-                <Td>{expense.title}</Td>
-                <Td>{expense.description}</Td>
-                <Td>${expense.amount}</Td>
-                <Td>{expense.date}</Td>
+            {mergedData.map((item) => (
+              <Tr key={item.eventId}>
+                <Td>{item.title}</Td>
+                <Td>{item.userName}</Td>
+                <Td>
+                  <Image
+                    src={item.userProfile}
+                    alt={`Profile of ${item.userName}`}
+                    borderRadius="full"
+                    boxSize="50px"
+                    objectFit="cover"
+                  />
+                </Td>
               </Tr>
             ))}
           </Tbody>
         </Table>
-      ) : (
-        <Text>Loading...</Text>
-      )}
-    </Box> */}
+      </TableContainer>
     </Box>
   );
 }
+
+export default Dashboard;

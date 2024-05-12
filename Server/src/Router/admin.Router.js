@@ -5,14 +5,14 @@ const { auth } = require("../middleware/auth.middleare");
 
 
 const adminRouter = express.Router();
-
-adminRouter.post("/add",auth,access("admin"), AddUser);
+adminRouter.post('/users', auth, access('admin'), AddUser);
 
 adminRouter.get("/users",auth,access("admin"), getUsers);
 
 adminRouter.get("/user/:id",auth,access("admin"), userData);
 
-adminRouter.patch("/users", updateUser);
+adminRouter.patch("/users/:id", auth, access("admin"), updateUser);
+
 
 adminRouter.delete("/users/:id", deleteUser);
 

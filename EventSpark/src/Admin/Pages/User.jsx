@@ -1,33 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
-  Select,
-  Flex,
-  IconButton,
-  useToast,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton
-} from '@chakra-ui/react';
 import axios from 'axios';
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import {
+  Box, Button, FormControl, FormLabel, Input, Table,
+  Thead, Tbody, Tfoot, Tr, Th, Td, TableContainer,
+  Select, Flex, IconButton, useToast, Modal,
+  ModalOverlay, ModalContent, ModalHeader, ModalFooter,
+  ModalBody, ModalCloseButton, Text
+} from '@chakra-ui/react';
 import { FaRegArrowAltCircleRight, FaRegArrowAltCircleLeft } from "react-icons/fa";
+
+const UserModal = ({ isOpen, onClose, user, onChange, onSave }) => {
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+    <ModalOverlay />
+    <ModalContent>
+      <ModalHeader>{user?.email ? 'Edit User' : 'Add New User'}</ModalHeader>
+      <ModalCloseButton />
+      <ModalBody>
+        <FormControl isRequired>
+          <FormLabel>Username</FormLabel>
+          <Input name="username" placeholder="Username" value={user.username || ''} onChange={onChange} mb={3} />
+          <FormLabel>Email</FormLabel>
+          <Input name="email" placeholder="Email" value={user.email || ''} onChange={onChange} mb={3} />
+          <FormLabel>Password</FormLabel>
+          <Input name="password" placeholder="Password" type="password" value={user.password || ''} onChange={onChange} mb={3} />
+          <FormLabel>Date of Birth</FormLabel>
+          <Input name="dateOfBirth" type="date" value={user.dateOfBirth || ''} onChange={onChange} mb={3} />
+          <FormLabel>Role</FormLabel>
+          <Select name="role" value={user.role || ''} onChange={onChange}>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </Select>
+        </FormControl>
+      </ModalBody>
+      <ModalFooter>
+        <Button colorScheme="blue" onClick={onSave}>Save</Button>
+        <Button variant="ghost" onClick={onClose}>Cancel</Button>
+      </ModalFooter>
+    </ModalContent>
+  </Modal>
+  );
+};
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -38,12 +51,8 @@ const UserList = () => {
   const [minAge, setMinAge] = useState('');
   const [maxAge, setMaxAge] = useState('');
   const [sort, setSort] = useState('');
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [userDetails, setUserDetails] = useState({
-    username: '', age: '', email: '', userID: ''
-  });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState({ username: '', age: '', email: '', userID: '' });
   const toast = useToast();
 
   useEffect(() => {
@@ -52,20 +61,10 @@ const UserList = () => {
 
   const fetchUsers = async () => {
     try {
-      // const token = localStorage.getItem('token');
-      const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTQ5OTI5OSwiZXhwIjoxNzE1NTAyODk5fQ.mqK_17DNjeFR8U2qoYn6KikJDNgRrp8Bf2-sw3KvQIE"
-
-
       const { data } = await axios.get(`http://localhost:8080/admin/users`, {
         params: { page, limit, search, minAge, maxAge, sort },
-        headers: {
-          // Include the Authorization header with the Bearer token
-          Authorization: `Bearer ${token}`
-        }
+        headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTUyMDIyNywiZXhwIjoxNzE1NTIzODI3fQ.9Ap1aJWH0AhJSu-vgkDrwBBD_Cbx_MRnq3-Qdfft_cE` }
       });
-  
-     const usersData=data.users.filter(user=>user.role=="user");
-     console.log(usersData);
       setUsers(data.users);
       setTotalPages(data.totalPages);
     } catch (error) {
@@ -79,15 +78,11 @@ const UserList = () => {
     }
   };
 
-
- 
-
-
-
-
   const handleDeleteUser = async (userID) => {
     try {
-      await axios.delete(`http://localhost:8080/admin/users/${userID}`);
+      await axios.delete(`http://localhost:8080/admin/users/${userID}`, {
+        headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTUyMDIyNywiZXhwIjoxNzE1NTIzODI3fQ.9Ap1aJWH0AhJSu-vgkDrwBBD_Cbx_MRnq3-Qdfft_cE` }
+      });
       setUsers(users.filter(user => user.userID !== userID));
       toast({
         title: 'User Deleted',
@@ -107,51 +102,73 @@ const UserList = () => {
     }
   };
 
- 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCurrentUser(prev => ({ ...prev, [name]: value }));
+  };
 
+  // const handleSaveUser = async () => {
+  //   const method = currentUser.userID ? 'patch' : 'post';
+  //   const url = currentUser.userID ? `http://localhost:8080/admin/users/${currentUser.userID}` : `http://localhost:8080/admin/users`;
+  //   try {
+  //     await axios[method](url, currentUser, {
+  //       headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTUyMDIyNywiZXhwIjoxNzE1NTIzODI3fQ.9Ap1aJWH0AhJSu-vgkDrwBBD_Cbx_MRnq3-Qdfft_cE` }
+  //     });
+  //     const message = currentUser.userID ? 'User updated successfully.' : 'User added successfully.';
+  //     fetchUsers();  // Refetch users to reflect changes
+  //     toast({
+  //       title: message,
+  //       status: 'success',
+  //       duration: 5000,
+  //       isClosable: true,
+  //     });
+  //     closeModal();
+  //   } catch (error) {
+  //     toast({
+  //       title: 'Error saving user',
+  //       description: error.response?.data?.error || 'Failed to save user details',
+  //       status: 'error',
+  //       duration: 9000,
+  //       isClosable: true,
+  //     });
+  //   }
+  // };
 
+  const handleSaveUser = async () => {
+    const url = currentUser.email ? `http://localhost:8080/admin/users/${currentUser.email}` : `http://localhost:8080/admin/users`;
+    const method = currentUser.email ? 'patch' : 'post';
+    try {
+      await axios[method](url, currentUser, {
+        headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTUyMDIyNywiZXhwIjoxNzE1NTIzODI3fQ.9Ap1aJWH0AhJSu-vgkDrwBBD_Cbx_MRnq3-Qdfft_cE` }
+      });
+      const message = currentUser.email ? 'User updated successfully.' : 'User added successfully.';
+      fetchUsers();  // Refetch users to reflect changes
+      toast({
+        title: message,
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+      closeModal();
+    } catch (error) {
+      toast({
+        title: 'Error saving user',
+        description: error.response?.data?.error || 'Failed to save user details',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  };
 
-
-
-  const openEditModal = (user) => {
+  const openModal = (user = { username: '', email: '', password: '', dateOfBirth: '', role: 'user' }) => {
     setCurrentUser(user);
-    setIsEditModalOpen(true);
+    setIsModalOpen(true);
   };
 
-  const closeEditModal = () => {
-    setIsEditModalOpen(false);
-    setCurrentUser(null);
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
-
-  const openAddModal = () => {
-    setIsAddModalOpen(true);
-  };
-
-  const closeAddModal = () => {
-    setIsAddModalOpen(false);
-  };
-
-  const UserModal = ({ isOpen, onClose, user }) => (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>{user ? 'Edit User' : 'Add New User'}</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <Input placeholder="Username" defaultValue={user ? user.username : ''} mb={3} />
-          <Input placeholder="Age" type="number" defaultValue={user ? user.age : ''} mb={3} />
-          <Input placeholder="Email" defaultValue={user ? user.email : ''} mb={3} />
-        </ModalBody>
-        <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
-            Save
-          </Button>
-          <Button variant="ghost" onClick={onClose}>Cancel</Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
-  );
- 
 
 
   return (
@@ -162,10 +179,9 @@ const UserList = () => {
           id='search'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search by name or email"
-        />
+          placeholder="Search by name or email"/>
         <Flex mt={4} justifyContent="center" alignItems="center">
-          <Button mr={4} onClick={openAddModal}>Add User</Button>
+          <Button mr={4} onClick={() => openModal()}>Add User</Button>
           <Input
             type="number"
             value={minAge}
@@ -183,7 +199,7 @@ const UserList = () => {
           <Select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            placeholder="Sort by Events"
+            placeholder="Sort by"
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
@@ -191,7 +207,7 @@ const UserList = () => {
         </Flex>
       </FormControl>
       <TableContainer>
-        <Table variant="striped">
+        <Table variant="striped" size="sm">
           <Thead>
             <Tr>
               <Th>UserID</Th>
@@ -203,52 +219,52 @@ const UserList = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {users.map((user) => (
-              <Tr key={user._id}>
-                <Td>{user.userID}</Td>
-                <Td>{user.username}</Td>
-                <Td>{user.age}</Td>
-                <Td>{user.email}</Td>
-                <Td>{user.eventsBooked.length}</Td>
-                <Td>
-                  <Button colorScheme="blue" mr={3} onClick={() => openEditModal(user)}>Edit</Button>
-                  <Button colorScheme="red" onClick={() => handleDeleteUser(user.userID)}>Delete</Button>
-                </Td>
-              </Tr>
-            ))}
-          </Tbody>
+  {users.map((user) => (
+    <Tr key={user.userID}>
+      <Td>{user.userID}</Td>
+      <Td>{user.username}</Td>
+      <Td>{user.age}</Td>
+      <Td>{user.email}</Td>
+      <Td>{user.eventsBooked.length}</Td>
+      <Td>
+        <Button colorScheme="blue" mr={3} onClick={() => openModal(user)}>Edit</Button>
+        <Button colorScheme="red" onClick={() => handleDeleteUser(user.userID)}>Delete</Button>
+      </Td>
+    </Tr>
+  ))}
+</Tbody>
+
           <Tfoot>
             <Tr>
               <Th colSpan="6">
                 <Flex justifyContent="space-between" alignItems="center">
                   <IconButton
                     icon={<FaRegArrowAltCircleLeft />}
-                    onClick={() => setPage(Math.max(1, page - 1))}
+                    onClick={() => setPage(prev => Math.max(1, prev - 1))}
                     isDisabled={page === 1}
                     aria-label="Previous Page"
+                    size="lg"
                   />
-                  <span>Page {page} of {totalPages}</span>
+                  <Text fontSize="lg">Page {page} of {totalPages}</Text>
                   <IconButton
                     icon={<FaRegArrowAltCircleRight />}
-                    onClick={() => setPage(page + 1)}
+                    onClick={() => setPage(prev => Math.min(totalPages, prev + 1))}
                     isDisabled={page === totalPages}
                     aria-label="Next Page"
+                    size="lg"
                   />
-                </Flex
-              ></Th>
+                </Flex>
+              </Th>
             </Tr>
           </Tfoot>
         </Table>
       </TableContainer>
       <UserModal
-        isOpen={isEditModalOpen}
-        onClose={closeEditModal}
+        isOpen={isModalOpen}
+        onClose={closeModal}
         user={currentUser}
-      />
-      <UserModal
-        isOpen={isAddModalOpen}
-        onClose={closeAddModal}
-        user={null}
+        onChange={handleChange}
+        onSave={handleSaveUser}
       />
     </Box>
   );

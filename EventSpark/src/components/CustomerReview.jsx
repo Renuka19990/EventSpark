@@ -45,8 +45,8 @@ const CustomerReview = () => {
       spacing={{ base: 8, md: 10 }}
       align={'center'}
       direction={'column'}>
-      <Heading as="h1" size="3xl" mb={8} color="gray.500">
-        Customer Reviews 
+      <Heading as="h1" size="xl" mb={6} color="blue.400" className="text-center ">
+        Customer Reviews📃 
       </Heading>
       <Box maxW="1200px" w="100%" mx="auto">
         <Grid

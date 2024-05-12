@@ -16,11 +16,11 @@ import {
     MdStore,
     MdStyle,
   } from "react-icons/md";
-  import { useNavigate } from "react-router-dom"; // Import useNavigate
+  import { useNavigate } from "react-router-dom"; 
   
   const EventRelatedButtons = () => {
     const [isSmallerScreen] = useMediaQuery("(max-width: 768px)");
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();
   
     const events = [
       { name: "Music", icon: MdHeadphones },
@@ -58,7 +58,7 @@ import {
                 color: "rgb(37 99 235)",
                 transform: "scale(1.15)",
               }}
-              onClick={() => navigate("/events")} // Navigate on click
+              onClick={() => navigate("/events")} 
             >
               <Center>
                 <event.icon size={isSmallerScreen ? 25 : 50} />

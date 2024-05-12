@@ -1,3 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 "use client";
 
 import {
@@ -49,7 +53,7 @@ export function EventsCard({event}) {
     
     return (
             <Box 
-                maxW={"350px"}
+                maxW={"290px"}
                 w={"full"}
                 bg={useColorModeValue("white", "gray.900")}
                 boxShadow={"2xl"}
@@ -246,7 +250,7 @@ export const EventsNav = () => {
     };
 
     return (
-        <Container maxW={"8xl"}>
+        <Container maxW={"7xl"}>
             <Flex flexDirection={"column"} rowGap={5}>
             <Flex justifyContent="space-between" alignItems="center" display={{ base: 'none', lg: 'flex' }} >
                     <Input
@@ -321,7 +325,7 @@ export const EventsNav = () => {
                         bg={useColorModeValue("white", "gray.800")}
                         p={4}
                         pl={0}
-                        columnGap={9}
+                        columnGap={6}
                         justifyContent="center"
                         alignItems="center"
                         display={{ base: 'none', lg: 'flex' }}
@@ -360,7 +364,7 @@ export const EventsNav = () => {
                         ))}
                     </Select>
                 </Flex>
-                {events.length>0?<Grid rowGap={6} columnGap={5} templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }}>
+                {events.length>0?<Grid rowGap={6} columnGap={5}  templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }}>
                     {events.map((event, index) => (
                         <EventsCard key={index} event={event} />
                     ))}

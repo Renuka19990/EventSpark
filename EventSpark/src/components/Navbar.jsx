@@ -68,7 +68,7 @@ export default function Navbar() {
             color={useColorModeValue("gray.800", "white")}
             maxH={{ base: "0", md: "none" }} 
           >
-            <Image style={{ height: "80px" }} src={logo} />
+            <Image style={{ height: "60px" }} src={logo} />
           </Text>
         </Flex>
 
@@ -88,7 +88,7 @@ export default function Navbar() {
             }}
             ml={7}
             as={"a"}
-            fontSize={"xl"}
+            fontSize={"sm"}
             fontWeight={700}
             variant={"link"}
             href={"#"}
@@ -101,7 +101,7 @@ export default function Navbar() {
             }}
             ml={7}
             as={"a"}
-            fontSize={"xl"}
+            fontSize={"sm"}
             fontWeight={700}
             variant={"link"}
             href={"#"}
@@ -132,7 +132,7 @@ const DesktopNav = () => {
               <Link
                 p={2}
                 href={navItem.href ?? "#"}
-                fontSize={"xl"}
+                fontSize={"sm"}
                 fontWeight={500}
                 color={linkColor}
                 _hover={{
@@ -147,7 +147,7 @@ const DesktopNav = () => {
             {navItem.children && (
               <PopoverContent
                 border={0}
-                boxShadow={"xl"}
+                boxShadow={"sm"}
                 bg={popoverContentBgColor}
                 p={4}
                 rounded={"xl"}
@@ -212,7 +212,7 @@ const MobileNav = () => {
       display={{ md: "none" }}
     >
       <Flex justify={"center"} align={"center"} mb={4}>
-        <Image style={{ height: "auto", maxHeight: "80px" }} src={logo} />
+        <Image style={{ height: "auto", maxHeight: "60px" }} src={logo} />
       </Flex>
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />

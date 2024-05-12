@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
     Container,
     Stack,
@@ -14,7 +15,7 @@ import {
 
   export function VideoTextComponent() {
     return (
-      <Container maxW={'8xl'}>
+      <Container maxW={'7xl'}>
         <Stack
           align={'center'}
           spacing={{ base: 8, md: 10 }}
@@ -38,7 +39,7 @@ import {
               </Text>
             </Heading>
             <Text color={'gray.500'}>
-            Discover our dynamic lineup of events! From cutting-edge conferences to engaging workshops, we've got something for everyone. Join us to explore trends, gain insights, and connect with industry leaders. Don't miss out—reserve your spot today!
+            Discover our dynamic lineup of events! From cutting-edge conferences to engaging workshops, we&apos;ve got something for everyone. Join us to explore trends, gain insights, and connect with industry leaders. Don&apos;t miss out—reserve your spot today!
             </Text>
             <Stack
               spacing={{ base: 4, sm: 6 }}

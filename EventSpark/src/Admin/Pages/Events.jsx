@@ -71,7 +71,7 @@ function App() {
   const handleFilterChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
-
+//
   return (
     <Box p={5}>
       <Text fontSize="2xl" mb={4}>Events</Text>

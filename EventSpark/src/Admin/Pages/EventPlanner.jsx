@@ -84,7 +84,7 @@ const EventPlanner = () => {
 
 
 
-
+//
   const handleDeleteUser = async (userID) => {
     try {
       await axios.delete(`http://localhost:8080/admin/users/${userID}`);

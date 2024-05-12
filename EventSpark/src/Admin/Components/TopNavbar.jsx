@@ -3,14 +3,14 @@ import { Flex, Button, useColorModeValue, Image, Input } from '@chakra-ui/react'
 import { useAuth } from '../Context/ThemeContext';
 import logo from '../images/dark_bg.png'
 import Sidebar from './Sidebar';
- // Make sure to import the useAuth hook
+ // Make sure to import the useAuth 
 
 const TopNavBar = () => {
   const { isLoggedIn, login, logout } = useAuth();
 
   return (
     <>   
-  
+
      <Flex
     px="4"
     py="2"

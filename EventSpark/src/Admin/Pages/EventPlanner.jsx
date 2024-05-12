@@ -53,7 +53,7 @@ const EventPlanner = () => {
   const fetchUsers = async () => {
     try {
       // const token = localStorage.getItem('token');
-      const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTUyMDIyNywiZXhwIjoxNzE1NTIzODI3fQ.9Ap1aJWH0AhJSu-vgkDrwBBD_Cbx_MRnq3-Qdfft_cE"
+      const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTUyNTUyMiwiZXhwIjoxNzE1NTI5MTIyfQ.1ySV6Ndcm8z8AXmiQThuwIBXN0CNC_cfrydThxHCId4"
 
 
       const { data } = await axios.get(`http://localhost:8080/admin/users`, {

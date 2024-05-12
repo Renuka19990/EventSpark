@@ -3,7 +3,7 @@ const { deleteUser, updateUser, userData, getUsers, AddUser } = require("../Cont
 const { access } = require("../middleware/rolebased.middleware");
 const { auth } = require("../middleware/auth.middleare");
 
-
+//
 const adminRouter = express.Router();
 adminRouter.post('/users', auth, access('admin'), AddUser);
 

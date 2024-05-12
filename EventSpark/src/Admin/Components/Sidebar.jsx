@@ -20,6 +20,7 @@ import {
   FiSettings,
   FiMenu,
   FiUserPlus,
+  FiUser,
 } from 'react-icons/fi';
 import TopNavBar from './TopNavbar';
 
@@ -27,7 +28,7 @@ const LinkItems = [
     { name: 'Dashboard', icon: FiHome, to: '/admin/dashboard' },
     { name: 'EventPlanner', icon: FiUserPlus, to: '/admin/eventPlanner' },
     { name: 'Events', icon: FiTrendingUp, to: '/admin/events' },
-    { name: 'Users', icon: FiCompass, to: '/admin/users' },
+    { name: 'Users', icon: FiUser, to: '/admin/users' },
     { name: 'Settings', icon: FiSettings, to: '/admin/settings' },
 
   ];

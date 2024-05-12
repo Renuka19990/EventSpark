@@ -1,10 +1,14 @@
 
-import Carousel from "../components/Carousels"
+// import Carousel from "../components/Carousels"
+import GridBlurredBackdrop from "../components/CustomerReview"
+import MagicBanner from "../components/MagicBanner"
 
 const HomePage = () => {
   return (
     <div>
-      <Carousel/>
+      {/* <Carousel/> */}
+      <MagicBanner/>
+      <GridBlurredBackdrop/>
     </div>
   )
 }

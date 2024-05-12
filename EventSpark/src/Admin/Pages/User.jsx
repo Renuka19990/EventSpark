@@ -41,6 +41,9 @@ const UserList = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [userDetails, setUserDetails] = useState({
+    username: '', age: '', email: '', userID: ''
+  });
   const toast = useToast();
 
   useEffect(() => {
@@ -49,9 +52,20 @@ const UserList = () => {
 
   const fetchUsers = async () => {
     try {
+      // const token = localStorage.getItem('token');
+      const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTQ5OTI5OSwiZXhwIjoxNzE1NTAyODk5fQ.mqK_17DNjeFR8U2qoYn6KikJDNgRrp8Bf2-sw3KvQIE"
+
+
       const { data } = await axios.get(`http://localhost:8080/admin/users`, {
         params: { page, limit, search, minAge, maxAge, sort },
+        headers: {
+          // Include the Authorization header with the Bearer token
+          Authorization: `Bearer ${token}`
+        }
       });
+  
+     const usersData=data.users.filter(user=>user.role=="user");
+     console.log(usersData);
       setUsers(data.users);
       setTotalPages(data.totalPages);
     } catch (error) {
@@ -64,6 +78,12 @@ const UserList = () => {
       });
     }
   };
+
+
+ 
+
+
+
 
   const handleDeleteUser = async (userID) => {
     try {
@@ -86,6 +106,12 @@ const UserList = () => {
       });
     }
   };
+
+ 
+
+
+
+
 
   const openEditModal = (user) => {
     setCurrentUser(user);
@@ -125,6 +151,8 @@ const UserList = () => {
       </ModalContent>
     </Modal>
   );
+ 
+
 
   return (
     <Box width="100%" p={4}>

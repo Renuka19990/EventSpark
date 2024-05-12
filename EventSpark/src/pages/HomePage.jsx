@@ -3,6 +3,8 @@
 import GridBlurredBackdrop from "../components/CustomerReview"
 import EventRelatedButtons from "../components/EventRelatedButtons"
 import MagicBanner from "../components/MagicBanner"
+import TopDestinationsIndia from "../components/TopDestinations"
+import TrendingEvents from "../components/TrendingEvents"
 
 const HomePage = () => {
   return (
@@ -10,6 +12,8 @@ const HomePage = () => {
       {/* <Carousel/> */}
       <MagicBanner/>
       <EventRelatedButtons/>
+      <TrendingEvents/>
+      <TopDestinationsIndia/>
       <GridBlurredBackdrop/>
     </div>
   )

@@ -46,7 +46,7 @@ const CustomerReview = () => {
       align={'center'}
       direction={'column'}>
       <Heading as="h1" size="3xl" mb={8} color="gray.500">
-        Customer Reviews
+        Customer Reviews 
       </Heading>
       <Box maxW="1200px" w="100%" mx="auto">
         <Grid

@@ -7,7 +7,9 @@ const eventRoute = express.Router();
 
 
 // Routes for getting all events and adding a new event
-eventRoute.get('/events',  getEvents);
+
+eventRoute.get('/events', getEvents);
+
 
 eventRoute.post('/addevents',auth,access("user"), addEvent);
 

@@ -281,6 +281,6 @@ const NAV_ITEMS = [
   },
   {
     label: "Create Events",
-    href: "#",
+    href: "/createevents",
   },
 ];

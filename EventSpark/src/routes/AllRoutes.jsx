@@ -3,6 +3,8 @@ import HomePage from "../pages/HomePage"
 import FindEvents from "../pages/FindEvents"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
+import CreateEvent from "../pages/CreateEvent"
+import Authentication from "../pages/Authentication"
 import AdminPage from "../pages/AdminPage"
 import Dashboard from "../Admin/Pages/Dashboard"
 import Events from "../Admin/Pages/Events"
@@ -27,6 +29,8 @@ const AllRoutes = () => {
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/findevent" element={<FindEvents/>}/>
+        <Route path="/createevents" element={<CreateEvent/>}/>
+        <Route path="/authentication" element={<Authentication/>}/>
         <Route path="/admin" element={<AdminPage />}>
           <Route index element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard/>}/>

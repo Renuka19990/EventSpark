@@ -107,7 +107,7 @@ const TopDestinationsIndia = () => {
             borderBottom="10px solid rgb(240,85,55)"
             _hover={{
               borderBottomWidth: "70px",
-              transition: "border-bottom-width 0.2s ease-in-out",
+              transition: "border-bottom-width 0.4s ease-in-out",
             }}
           >
             <Image

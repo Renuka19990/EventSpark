@@ -7,7 +7,10 @@ const eventRoute = express.Router();
 
 
 // Routes for getting all events and adding a new event
-eventRoute.get('/events',auth,access("user"), getEvents);
+
+eventRoute.get('/events', getEvents);
+
+
 eventRoute.post('/addevents',auth,access("user"), addEvent);
 
 // Routes for getting particular user's events and particular event
@@ -16,6 +19,6 @@ eventRoute.get('/events/:id',auth,access("user"), event);
 
 // Routes for updating and deleting events
 eventRoute.patch('/events/:id',auth,access("user"), updateEvent);
-eventRoute.delete('/events/:id',auth,access("user"), deleteEvent);
+eventRoute.delete('/events/:id', deleteEvent);
 
 module.exports = {eventRoute};

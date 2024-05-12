@@ -10,9 +10,10 @@ const userSchema = new mongoose.Schema({
   profilePicture: { type: String },
   role: { type: String, enum: ["user", "admin", "eventPlanner"], default: "user" },
   eventsBooked: { type: [Number], default: [] },
-  eventsPlanned: { type: [Number], default: [] }
-},{ versionKey: false });
+  isDisabled: { type: Boolean, default:false}
+});
 
 const UserModel = mongoose.model("User", userSchema);
 
 module.exports = {UserModel};
+

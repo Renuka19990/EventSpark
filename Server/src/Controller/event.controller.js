@@ -8,7 +8,7 @@ const { UserModel } = require("../Model/user.model");
 const getEvents = async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 10;
+        const limit = parseInt(req.query.limit) || 20;
         const { minPrice, maxPrice, city, sort, search } = req.query;
         const query = {};
 
@@ -35,7 +35,6 @@ const getEvents = async (req, res) => {
                 { organizer: { $regex: search, $options: "i" } },
             ];
         }
-
         const totalCount = await eventModel.countDocuments(query);
         const totalPages = Math.ceil(totalCount / limit);
 
@@ -46,16 +45,14 @@ const getEvents = async (req, res) => {
         } else {
             sortCriteria.eventDate = 1;
         }
-
         // For skipping
         const skip = (page - 1) * limit;
-
         // Query events with filtering, searching, sorting, and pagination
         const events = await eventModel.find(query)
             .skip(skip)
             .sort(sortCriteria)
             .limit(limit);
-
+        
         res.status(200).json({ events, totalPages });
     } catch (err) {
         console.error("Error while filtering, searching, and paginating events:", err);
@@ -177,11 +174,14 @@ const addEvent =async (req, res) => {
 
 
 //for updating events
+
+
+
 const updateEvent = async (req, res) => {
     const { id } = req.params;
     const eventId=id;
     try {
-        const updatedEvent = await EventModel.findOneAndUpdate({ eventId: eventId }, req.body, { new: true });        if (!updatedEvent) {
+        const updatedEvent = await eventModel.findOneAndUpdate({ eventId: eventId }, req.body, { new: true });        if (!updatedEvent) {
             return res.status(404).json({ success: false, message: "Event not found" });
         }
         res.status(200).json({ success: true, event: updatedEvent });
@@ -191,7 +191,7 @@ const updateEvent = async (req, res) => {
     }
 };
 
-//for deleting events
+//for deleting event
 const deleteEvent = async (req, res) => {
     const { id } = req.params;
     const eventId=id;

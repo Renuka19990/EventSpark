@@ -1,6 +1,6 @@
 const { eventModel } = require("../Model/event.model");
 const { UserModel } = require("../Model/user.model");
-
+const bcrypt = require("bcrypt");
 //for getting All USers User
 const getUsers=async(req,res)=>{
     try{
@@ -13,9 +13,9 @@ const getUsers=async(req,res)=>{
     if (minAge && maxAge) {
         query.age = { $gte: minAge, $lte: maxAge };
       } else if (minAge) {
-        query.age = { $gte: minAge };
+        query.age = { $lte: minAge };
       } else if (maxAge) {
-        query.age = { $lte: maxAge };
+        query.age = { $gte: maxAge };
       }
 
       // Added search functionality for searching name and Users
@@ -33,9 +33,9 @@ const getUsers=async(req,res)=>{
       // Adding sorting Based On the Enrolled Events
       const sortCriteria = {};
       if (sort === "desc") {
-        sortCriteria.TotalEvents = -1;
-      } else {
-        sortCriteria.TotalEvents = 1;
+        sortCriteria.username = -1;
+      }else if (sort === 'asc') {
+        sortCriteria.username = 1;
       }
      
       //for skipping

@@ -5,6 +5,7 @@ const categoryEnum = [
   "Tech",
   "Workshop",
   "Sports",
+  "Photography",
   "Food",
   "Art",
   "Expo",

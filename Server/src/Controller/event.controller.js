@@ -191,7 +191,7 @@ const updateEvent = async (req, res) => {
     }
 };
 
-//for deleting events
+//for deleting event
 const deleteEvent = async (req, res) => {
     const { id } = req.params;
     const eventId=id;

@@ -44,6 +44,9 @@ Frontend:https://eventspark.netlify.app/
 ## Video Walkthrough of the project:
 https://youtu.be/fEFdT0dGB2M
 
+## Admin Credentials:
+Email:ranjiv@gmail.com
+Password:1234
 
 ## Features
 - Secure user registration and authentication

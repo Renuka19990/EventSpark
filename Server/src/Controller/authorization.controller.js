@@ -77,7 +77,7 @@ const logIn = async (req, res) => {
           process.env.SECRET_KEY,
           { expiresIn: "1h" }
         );
-        res.status(200).json({ token });
+        res.status(200).json({ token ,role: user.role});
       } else {
         return res
           .status(401)

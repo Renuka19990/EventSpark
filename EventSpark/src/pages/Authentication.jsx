@@ -1,96 +1,268 @@
-import  { useState } from 'react';
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@chakra-ui/react';
+import React, { useState } from "react";
+import {
+  Box,
+  Flex,
+  Image,
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Link,
+  Img,
+} from "@chakra-ui/react";
+import logo from "../assets/logo.png";
+import { useAuth } from "../Admin/Context/ThemeContext";
+import { useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
-const Authentication = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
+const loggingCredentials={
+    email:"",
+    password:"",
+}
 
-  const handleForgotPasswordClick = () => {
-    setShowForgotPassword(true);
+const emptyUserObject = {
+    username: "",
+    email: "",
+    password: "",
+    dateOfBirth: "",
+    profilePicture: ""
+  };
+  
+
+export const Login = () => {
+  const [isLoginForm, setIsLoginForm] = useState(true);
+  const [isForgetPassword, setIsForgetPassword] = useState(false);
+  const [isRegisterForm, setIsRegisterForm] = useState(false);
+  const [isOtpStep, setIsOtpStep] = useState(false);
+  const [isResetPasswordStep, setIsResetPasswordStep] = useState(false);
+  const {login, logout,handleSignUp,handleLogin,LoggedIn,setLoggedIn } =useAuth();
+  const [loggingData,setLoggingData]=useState(loggingCredentials);
+  const [registerData,setRegisterDataData]=useState(emptyUserObject);
+  const toast = useToast();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const toastShow = handleLogin(loggingData);
+    toast.promise(toastShow, {
+      success: {
+        title: "Login Successful",
+        description: `Hi ${loggingData.email} Welcome Back`,
+      },
+      error: { title: "Login Failed", description: "Wrong Credential" },
+      loading: { title: "Promise pending", description: "Please wait" },
+    });
+
+    if(LoggedIn.isAdmin==="admin"){
+      navigate("/admin")
+    }else{
+        navigate("/")
+    }
   };
 
-  const handleLoginFormSubmit = (event) => {
-    event.preventDefault();
-    // Implement login functionality here
+
+  const handleChange = (e) => {
+    setLoggingData({ ...loggingData, [e.target.name]: e.target.value });
   };
 
-  const handleSignUpFormSubmit = (event) => {
-    event.preventDefault();
-    // Implement signup functionality here
+  const handleRegistration=(e)=>{
+       e.preventDefault();
+        handleSignUp(registerData);
+        setFormData(init);
+        navigate("/login");
+  }
+
+  const handleRegistrationChange = (e) => {
+    setRegisterDataData({ ...registerData, [e.target.name]: e.target.value });
+  };
+
+  const handleForgotPassword = () => {
+    setIsForgetPassword(true);
+    setIsLoginForm(false);
+    setIsRegisterForm(false);
+  };
+
+  const handleRegister = () => {
+    setIsRegisterForm(true);
+    setIsLoginForm(false);
+    setIsForgetPassword(false);
+  };
+
+  const handleBackToLogin = () => {
+    setIsLoginForm(true);
+    setIsForgetPassword(false);
+    setIsRegisterForm(false);
+  };
+
+  const handleSendResetLink = () => {
+    // Logic to send reset link and trigger OTP step
+    setIsOtpStep(true);
+  };
+
+  const handleVerifyOTP = () => {
+    // Logic to verify OTP and trigger password reset step
+    setIsResetPasswordStep(true);
+  };
+
+  const handleResetPassword = () => {
+    // Logic to reset password
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-96">
-        <Tabs variant='soft-rounded' colorScheme='blue' isFitted index={showForgotPassword ? 2 : (isLogin ? 0 : 1)}> 
-          <TabList mb="4">
-            <Tab onClick={() => setIsLogin(true)}>Login</Tab>
-            <Tab onClick={() => setIsLogin(false)}>Sign Up</Tab>
-            {/* Conditionally render the "Forgot Password" tab */}
-            {showForgotPassword && <Tab>Forgot Password</Tab>} 
-          </TabList>
+    <Box
+      height="100vh"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        w={{ base: "50%", md: "80%", lg: "60%" }}
+        h={{ base: "auto", md: "70%", lg: "70%" }}
+        border="1px solid #ccc"
+        borderRadius="md"
+        boxShadow="md"
+      >
+        <Box
+          flex="1"
+          h={{ base: "50%", md: "100%" }}
+          borderRight={{ base: "none", md: "1px solid #ccc" }}
+          borderBottom={{ base: "1px solid #ccc", md: "none" }}
+        >
+          <Img
+            src="https://cdn.taggbox.com/v7/taggbox.com/blog/wp-content/uploads/2021/03/stage-virtual.jpg?w=1000"
+            alt="Image"
+            height="100%"
+            objectFit="cover"
+          />
+        </Box>
+        <Box
+          flex="1"
+          p={5}
+          pt={2}
+          h={{ base: "50%", md: "100%" }}
+          alignItems="center"
+          justifyContent="center"
+          borderLeft={{ base: "none", md: "1px solid #ccc" }}
+          borderTop={{ base: "1px solid #ccc", md: "none" }}
+          marginTop={{ base: "16px", md: "0" }}
+        >
+          <Img src={logo} alt="Logo" mb={4} />
 
-          <TabPanels>
-            <TabPanel> 
-              {/* Login Form */}
-              <form onSubmit={handleLoginFormSubmit}>
-                <div className="mb-4">
-                  <label htmlFor="loginEmail" className="block text-gray-700 text-sm font-bold mb-2">Email:</label>
-                  <input type="email" id="loginEmail" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                </div>
-                <div className="mb-6">
-                  <label htmlFor="loginPassword" className="block text-gray-700 text-sm font-bold mb-2">Password:</label>
-                  <input type="password" id="loginPassword" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                </div>
-                <div className="flex items-center justify-between">
-                  <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login</button>
-                  <a href="#" onClick={handleForgotPasswordClick} className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">Forgot Password?</a>
-                </div>
-              </form>
-            </TabPanel>
+          {isLoginForm && !isForgetPassword && !isRegisterForm && (
+            <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+              <FormControl id="email" mb={4}>
+                <FormLabel>Email address</FormLabel>
+                <Input type="text" name="email" required placeholder="Enter your Email" w="100%" value={loggingData.email}  onChange={handleChange}/>
+              </FormControl>
 
-            <TabPanel> 
-              {/* Signup Form */}
-              <form onSubmit={handleSignUpFormSubmit}>
-                <div className="mb-4">
-                  <label htmlFor="signupUsername" className="block text-gray-700 text-sm font-bold mb-2">Username:</label>
-                  <input type="text" id="signupUsername" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="signupEmail" className="block text-gray-700 text-sm font-bold mb-2">Email:</label>
-                  <input type="email" id="signupEmail" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="signupPassword" className="block text-gray-700 text-sm font-bold mb-2">Password:</label>
-                  <input type="password" id="signupPassword" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="signupDateOfBirth" className="block text-gray-700 text-sm font-bold mb-2">Date of Birth:</label>
-                  <input type="date" id="signupDateOfBirth" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="signupProfilePicture" className="block text-gray-700 text-sm font-bold mb-2">Profile Picture:</label>
-                  <input type="text" id="signupProfilePicture" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                </div>
-                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign Up</button>
-              </form>
-            </TabPanel>
+              <FormControl id="password" mb={4}>
+                <FormLabel>Password</FormLabel>
+                <Input type="password" name="password" value={loggingData.password} onChange={handleChange} required placeholder="Enter your password" />
+              </FormControl>
 
-            {/* Forgot Password Tab */}
-            <TabPanel>
-              <form>
-                <div className="mb-4">
-                  <label htmlFor="forgotPasswordEmail" className="block text-gray-700 text-sm font-bold mb-2">Email:</label>
-                  <input type="email" id="forgotPasswordEmail" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                </div>
-                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Reset Password</button>
-              </form>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </div>
-    </div>
+              <Button type="submit" colorScheme="blue" mb={4} w="100%">
+                Sign in
+              </Button>
+
+              <Flex justify="space-between">
+                <Link onClick={handleForgotPassword}>Forgot Password?</Link>
+                <Link onClick={handleRegister}>Register</Link>
+              </Flex>
+            </form>
+          )}
+
+          {isForgetPassword && !isOtpStep && (
+            <form>
+              <FormControl id="email" mb={4}>
+                <FormLabel>Email address</FormLabel>
+                <Input type="email" style={{ maxWidth: "100%" }}  />
+              </FormControl>
+
+              <Button type="submit" colorScheme="blue" mb={4}>
+                Send Reset Link
+              </Button>
+
+              {isOtpStep && !isResetPasswordStep && (
+                <>
+                  <FormControl id="otp" mb={4}>
+                    <FormLabel>Enter OTP</FormLabel>
+                    <Input type="text" style={{ maxWidth: "100%" }}  />
+                  </FormControl>
+
+                  <Button onClick={handleVerifyOTP} colorScheme="blue" mb={4}>
+                    Verify OTP
+                  </Button>
+                </>
+              )}
+
+              {isResetPasswordStep && (
+                <>
+                  <FormControl id="password" mb={4}>
+                    <FormLabel>New Password</FormLabel>
+                    <Input type="password" style={{ maxWidth: "100%" }} />
+                  </FormControl>
+
+                  <FormControl id="confirmPassword" mb={4}>
+                    <FormLabel>Confirm Password</FormLabel>
+                    <Input type="password" style={{ maxWidth: "100%" }} />
+                  </FormControl>
+
+                  <Button type="submit" colorScheme="blue" mb={4}>
+                    Reset Password
+                  </Button>
+                </>
+              )}
+              <Link onClick={handleBackToLogin}>Back to Login</Link>
+            </form>
+          )}
+
+          {isRegisterForm && (
+            <form onSubmit={handleRegistration}>
+              <Flex
+                direction={{ base: "column", md: "row" }}
+                alignItems="center"
+              >
+                <FormControl id="username" mb={4} mr={{ md: 4 }}>
+                  <FormLabel>Username</FormLabel>
+                  <Input type="text" name="username" value={registerData.username}  required placeholder="Enter your Username" onChange={handleRegistrationChange} />
+                </FormControl>
+
+                <FormControl id="email" mb={4}>
+                  <FormLabel>Email address</FormLabel>
+                  <Input type="email" name="email"value={registerData.email}  required placeholder="Enter your Email" onChange={handleRegistrationChange} />
+                </FormControl>
+              </Flex>
+
+              <Flex
+                direction={{ base: "column", md: "row" }}
+                alignItems="center"
+              >
+                <FormControl id="password" mb={4} mr={{ md: 4 }}>
+                  <FormLabel>Password</FormLabel>
+                  <Input type="password" name="password" value={registerData.password} required placeholder="Enter your password"  onChange={handleRegistrationChange} />
+                </FormControl>
+
+                <FormControl id="dateOfBirth" mb={4}>
+                  <FormLabel>Date of Birth</FormLabel>
+                  <Input type="date" name="dateOfBirth" value={registerData.dateOfBirth}  required placeholder="Enter your Date Of Birth" onChange={handleRegistrationChange}  />
+                </FormControl>
+              </Flex>
+
+              <FormControl id="profilePicture" mb={4}>
+                <FormLabel>Profile Picture</FormLabel>
+                <Input type="text" name="profilePicture" value={registerData.profilePicture}  required placeholder="Add Your Profile Image" onChange={handleRegistrationChange} />
+              </FormControl>
+
+              <Button type="submit" colorScheme="blue" mb={4} w="100%">
+                Register
+              </Button>
+
+              <Link onClick={handleBackToLogin}>Back to Login</Link>
+            </form>
+          )}
+        </Box>
+      </Flex>
+    </Box>
   );
 };
-
-export default Authentication;

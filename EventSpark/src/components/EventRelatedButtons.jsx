@@ -37,7 +37,7 @@ const EventRelatedButtons = () => {
     <Flex
       flexWrap="wrap"
       justifyContent="center"
-      gap={isSmallerScreen ? 3 : 12}
+      gap={isSmallerScreen ? 3 : 20}
       mt={20}
     >
       {events.map((event) => (

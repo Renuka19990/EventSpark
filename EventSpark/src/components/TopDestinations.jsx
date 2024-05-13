@@ -82,7 +82,7 @@ const TopDestinationsIndia = () => {
   return (
     <Box
       p={4}
-      className="container mx-auto mt-10 relative"
+      className="container mx-auto  relative"
       overflow="hidden"
       position="relative"
     >

@@ -3,13 +3,14 @@ import HomePage from "../pages/HomePage"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import CreateEvent from "../pages/CreateEvent"
-import Authentication from "../pages/Authentication"
+import  { Login } from "../pages/Authentication"
 import AdminPage from "../pages/AdminPage"
 import Dashboard from "../Admin/Pages/Dashboard"
 import Events from "../Admin/Pages/Events"
 import User from "../Admin/Pages/User"
 import EventPlanner from "../Admin/Pages/EventPlanner"
 import { EventPage } from "../Eventpage/page"
+import { PrivateRouter, PrivateRouterUser } from "../Admin/Context/privateRoute"
 
 const AllRoutes = () => {
   const hideNavbarPaths = [
@@ -25,22 +26,22 @@ const AllRoutes = () => {
   const isAdminRoute = hideNavbarPaths.includes(location.pathname);
   return (
     <div>
-     {!isAdminRoute&& <Navbar/>}
-      <Routes>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="/events" element={<EventPage/>}/>
-        <Route path="/createevents" element={<CreateEvent/>}/>
-        <Route path="/authentication" element={<Authentication/>}/>
-        <Route path="/admin" element={<AdminPage />}>
-          <Route index element={<Dashboard />} />
-          <Route path="dashboard" element={<Dashboard/>}/>
-          <Route path="events" element={<Events/>} />
-          <Route path="users" element={<User/>} />
-          <Route path="eventPlanner" element={<EventPlanner/>} />
-        </Route>
-        <Route/>
-      </Routes>
-       { !isAdminRoute&&<Footer/>}
+     {!isAdminRoute}
+     <Routes>
+  <Route path="/" element={<HomePage />} />
+  <Route path="/events" element={<EventPage />} />
+  <Route path="/createevents" element={<PrivateRouter><CreateEvent/></PrivateRouter>} />
+  <Route path="/login" element={<Login />} />
+  <Route path="/admin" element={<PrivateRouterUser><AdminPage /></PrivateRouterUser>}>
+    <Route index element={<Dashboard />} />
+    <Route path="dashboard" element={<Dashboard />} />
+    {/* <Route path="events" element={<PrivateRouterUser><Events /></PrivateRouterUser>} /> */}
+    <Route path="users" element={<User />} />
+    <Route path="eventPlanner" element={<EventPlanner />} />
+  </Route>
+</Routes>
+
+       { !isAdminRoute}
     </div>
   )
 }

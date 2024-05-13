@@ -28,13 +28,13 @@ const AllRoutes = () => {
   <Routes>
   <Route path="/" element={<HomePage />} />
   <Route path="/events" element={<EventPage />} />
-  <Route path="/createevents" element={<PrivateRouter><CreateEvent/></PrivateRouter>} />
+  <Route path="/createevents" element={<PrivateRouterUser><CreateEvent/></PrivateRouterUser>} />
   <Route path="/login" element={<Login />} />
   <Route  path="/admin" element={<AdminPage />} />
-  <Route path="/dashboard" element={<Dashboard />} /> 
-  <Route path="/users" element={<User />} />
-  <Route path="/eventPlanner" element={<EventPlanner />} /> 
-  <Route path="eventsdetail" element={<Events />} /> 
+  <Route path="/admin/dashboard" element={<Dashboard />} /> 
+  <Route path="/admin/users" element={<User />} />
+  <Route path="/admin/eventPlanner" element={<EventPlanner />} /> 
+  <Route path="/admin/eventsdetail" element={<Events />} /> 
 {/* <Route path="/admin" element={<PrivateRouterUser><AdminPage /></PrivateRouterUser>}>
  <Route index element={<Dashboard />} />
     <Route path="/dashboard" element={<Dashboard />} /> 

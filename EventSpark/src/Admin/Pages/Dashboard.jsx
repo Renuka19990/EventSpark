@@ -21,6 +21,7 @@ import {
 } from '@chakra-ui/react';
 import { BsPerson } from 'react-icons/bs';
 import { FiServer, FiUsers } from 'react-icons/fi';
+import { AdminNav } from '../Components/AdminNav';
 
 const API_URL = 'http://localhost:8080';
 
@@ -60,10 +61,13 @@ function Dashboard() {
       axios.get(`${API_URL}/admin/users`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
       }),
-      axios.get(`${API_URL}/events`, {
+     axios.get(`${API_URL}/events`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
       })
     ]).then(([usersResponse, eventsResponse]) => {
+      console.log(usersResponse.data.users)
+      console.log(eventsResponse);
+      console.log(eventsResponse.data.events)
       setUsers(usersResponse.data.users);
       setEvents(eventsResponse.data.events);
     }).catch((error) => {
@@ -91,6 +95,8 @@ function Dashboard() {
   const mergedData = mergeData();
 
   return (
+    <>
+    <AdminNav/>
     <Box maxW="7xl" mx="auto" pt={5} px={{ base: 2, sm: 12, md: 17 }}>
       <chakra.h1 textAlign="left" fontSize="4xl" py={10} fontWeight="bold">
         Dashboard
@@ -136,6 +142,7 @@ function Dashboard() {
         </Table>
       </TableContainer>
     </Box>
+    </>
   );
 }
 

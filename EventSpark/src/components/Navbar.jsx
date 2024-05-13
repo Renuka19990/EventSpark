@@ -63,6 +63,7 @@ export default function Navbar() {
           alignItems="center"
           overflow="hidden"
         >
+          <Link to="/">
           <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             fontFamily={"heading"}
@@ -71,6 +72,7 @@ export default function Navbar() {
           >
             <Image style={{ height: "60px" }} src={logo} />
           </Text>
+          </Link>
         </Flex>
 
         <Flex display={{ base: "none", md: "flex" }} ml={10} align="center">

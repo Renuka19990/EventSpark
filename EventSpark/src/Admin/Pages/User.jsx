@@ -284,6 +284,7 @@ import {
   ModalBody, ModalCloseButton, Text
 } from '@chakra-ui/react';
 import { FaRegArrowAltCircleRight, FaRegArrowAltCircleLeft } from "react-icons/fa";
+import { AdminNav } from '../Components/AdminNav';
 
 const formatDateForInput = (dateString) => {
   return dateString ? new Date(dateString).toISOString().split('T')[0] : '';
@@ -425,7 +426,10 @@ const UserList = () => {
   };
 
   return (
+    <>
+    <AdminNav/>
     <Box width="100%" p={4}>
+      
       <FormControl mb={4}>
         <FormLabel htmlFor='search'>Search User</FormLabel>
         <Input
@@ -519,6 +523,7 @@ const UserList = () => {
         onSave={handleSaveUser}
       />
     </Box>
+    </>
   );
 };
 

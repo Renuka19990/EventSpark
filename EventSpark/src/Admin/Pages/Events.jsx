@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Badge, Box, Button, Flex, Grid, IconButton, Image, Input, Select, Text, useToast } from '@chakra-ui/react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
+import { AdminNav } from '../Components/AdminNav';
 
 const API_URL = 'http://localhost:8080';
 
-function App() {
+function EventsAdmin() {
   const [events, setEvents] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -46,7 +47,7 @@ function App() {
   const deleteEvent = async (eventId) => {
     try {
       await axios.delete(`${API_URL}/events/${eventId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
+        headers: { Authorization: `Bearer  ${localStorage.getItem('accessToken')}` }
       });
       setEvents(events.filter(event => event.eventId !== eventId));
       toast({
@@ -72,6 +73,8 @@ function App() {
   };
 //
   return (
+    <>
+    <AdminNav/>
     <Box p={5}>
       <Text fontSize="2xl" mb={4}>Events</Text>
       <Flex mb={4} gap={2} align="center">
@@ -95,7 +98,7 @@ function App() {
               </Text>
               <Text mt={2} noOfLines={1} fontWeight="bold">{event.title}</Text>
               <Text fontSize="sm" mt={1} noOfLines={2}>{event.description}</Text>
-              <Text fontWeight="semibold" mt={2}>${event.price} USD</Text>
+              <Text fontWeight="semibold" mt={2}>${event.Price} USD</Text>
               <Flex mt={2}>
                 {event.ticketTypes.map(type => (
                   <Badge key={type} borderRadius="full" px="2" colorScheme="teal" mr={1}>{type}</Badge>
@@ -122,7 +125,8 @@ function App() {
         />
       </Flex>
     </Box>
+    </>
   );
 }
 
-export default App;
+export default EventsAdmin;

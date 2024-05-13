@@ -62,7 +62,7 @@ const CreateEvent = () => {
     if (Object.keys(validationErrors).length > 0) return;
 
     try {
-      const response = await fetch("http://localhost:8080/events", {
+      const response = await fetch("https://eventspark-ldbp.onrender.com/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(eventData),

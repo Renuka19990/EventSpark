@@ -4,7 +4,7 @@ import { Badge, Box, Button, Flex, Grid, IconButton, Image, Input, Select, Text,
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { AdminNav } from '../Components/AdminNav';
 
-const API_URL = 'http://localhost:8080';
+const API_URL = 'https://eventspark-ldbp.onrender.com';
 
 function EventsAdmin() {
   const [events, setEvents] = useState([]);

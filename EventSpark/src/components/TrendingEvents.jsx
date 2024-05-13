@@ -98,4 +98,6 @@ const TrendingEvents = () => {
   );
 };
 
+
+
 export default TrendingEvents;

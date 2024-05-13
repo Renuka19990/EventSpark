@@ -59,7 +59,7 @@ export const Login = () => {
     //   navigate("/admin/dashboard")
     // }else{
       console.log(LoggedIn.isAdmin=="admin")
-      {LoggedIn.isAdmin==="admin"?navigate("/"):navigate("/admin")}
+      {LoggedIn.isAdmin!=="admin"?navigate("/"):navigate("/admin")}
     // }
   };
 

@@ -28,6 +28,8 @@ import {
 import axios from 'axios';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { FaRegArrowAltCircleRight, FaRegArrowAltCircleLeft } from "react-icons/fa";
+import Sidebar from '../Components/Sidebar';
+import { AdminNav } from '../Components/AdminNav';
 
 const EventPlanner = () => {
   const [users, setUsers] = useState([]);
@@ -153,8 +155,10 @@ const EventPlanner = () => {
 
 
   return (
+    <>
+    <AdminNav/>
     <Box width="100%" p={4}>
-      <FormControl mb={4}>
+      <FormControl mb={4} mt={4}>
         <FormLabel htmlFor='search'>Search User</FormLabel>
         <Input
           id='search'
@@ -249,6 +253,7 @@ const EventPlanner = () => {
         user={null}
       />
     </Box>
+    </>
   );
 };
 

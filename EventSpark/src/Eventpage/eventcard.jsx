@@ -63,6 +63,7 @@ export function EventsCard({event}) {
                 borderRadius={"lg"}
                 transition={"transform 0.3s ease"}
                 _hover={{ transform: "scale(1.05)", borderRadius: "lg" }}
+                cursor={"pointer"}
                 position="relative"
             >
                 <Box

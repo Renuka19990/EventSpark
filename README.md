@@ -61,19 +61,20 @@ Frontend:
 The development focused on creating an intuitive and secure platform that emphasizes community building among food enthusiasts. Assumptions include a high engagement rate based on quality content and user-friendly features.
 
 # Navbar
-![]()
+![Navbar](EventSpark\EventSpark\public\Navbar.png)
 
 # SignIn / SignUp
-![]()
+![SignIn/SignUp](EventSpark\EventSpark\public\LoginPage.png)
 
 # Mid-Section / Carousel
-![]()
+![Carousel](EventSpark\EventSpark\public\123.png)
 
 # Profile 
-![]()
+![Profile](EventSpark\EventSpark\public\MidSection.png)
 
 # Footer
-![]()
+![Footer](EventSpark\EventSpark\public\Footer.png)
+
 
 
 ## Installation & Getting Started

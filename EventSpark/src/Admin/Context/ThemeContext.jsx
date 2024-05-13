@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     return new Promise(async (resolve, reject) => {
       try {
         console.log(email, password);
-        const res = await axios.post("http://localhost:8080/login", {
+        const res = await axios.post("https://eventspark-ldbp.onrender.com/login", {
           email,
           password,
         });
@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 
   const handleSignUp = async (obj) => {
     try {
-      const res = await axios.post("http://localhost:8080/register", obj);
+      const res = await axios.post("https://eventspark-ldbp.onrender.com/register", obj);
       console.log(res.data);
     } catch (error) {
       console.log(error);
@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
   const handleLogout = async () => {
             try {
               const token = localStorage.getItem("accessToken");
-              const res = await axios.get("http://localhost:8080/logout", {
+              const res = await axios.get("https://eventspark-ldbp.onrender.com/logout", {
                 headers: {
                   Authorization: `Bearer ${token}`,
                 },

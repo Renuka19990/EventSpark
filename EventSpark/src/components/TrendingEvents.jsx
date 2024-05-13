@@ -25,7 +25,7 @@ const TrendingEvents = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("http://localhost:8080/events");
+        const response = await fetch("https://eventspark-ldbp.onrender.com/events");
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -97,5 +97,7 @@ const TrendingEvents = () => {
     </Box>
   );
 };
+
+
 
 export default TrendingEvents;

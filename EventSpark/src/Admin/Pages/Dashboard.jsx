@@ -23,7 +23,7 @@ import { BsPerson } from 'react-icons/bs';
 import { FiServer, FiUsers } from 'react-icons/fi';
 import { AdminNav } from '../Components/AdminNav';
 
-const API_URL = 'http://localhost:8080';
+const API_URL = 'https://eventspark-ldbp.onrender.com';
 
 function StatsCard({ title, stat, icon }) {
   return (

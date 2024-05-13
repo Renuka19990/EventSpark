@@ -2,13 +2,15 @@ const express = require("express");
 const cors = require("cors");
 
 const { connectToDb } = require("./src/Config/config");
-const { authRouter } = require("./src/Router/authorization.router");
+
 const { auth } = require("./src/middleware/auth.middleare");
 const { access } = require("./src/middleware/rolebased.middleware");
 const { adminRouter } = require("./src/Router/admin.Router");
 const { eventRoute } = require("./src/Router/event.Router");
+const { authRouter } = require("./src/Router/authorization.router");
 
-const PORT = 8080 || process.env.PORT;
+const PORT = 3000|| process.env.PORT;
+
 const app = express();
 app.use(cors());
 app.use(express.json());

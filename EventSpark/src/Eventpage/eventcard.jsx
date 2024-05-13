@@ -205,7 +205,7 @@ export const EventsNav = () => {
         fetchEvents();
     }, [currentPage, debouncedSearchQuery, sortOrder, activeCategory, minPrice, maxPrice]);
 
-    const API_URL = "http://localhost:8080/events";
+    const API_URL = "https://eventspark-ldbp.onrender.com/events";
 
     const fetchEvents = async () => {
         try {

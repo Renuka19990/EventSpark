@@ -11,6 +11,7 @@ import User from "../Admin/Pages/User"
 import EventPlanner from "../Admin/Pages/EventPlanner"
 import { EventPage } from "../Eventpage/page"
 import { PrivateRouter, PrivateRouterUser } from "../Admin/Context/privateRoute"
+import SingleEvent from "../components/SingleEvent"
 
 const AllRoutes = () => {
   // const hideNavbarPaths = [
@@ -28,6 +29,7 @@ const AllRoutes = () => {
   <Routes>
   <Route path="/" element={<HomePage />} />
   <Route path="/events" element={<EventPage />} />
+  <Route path="/events/:eventId" element={<SingleEvent/>} />
   <Route path="/createevents" element={<PrivateRouterUser><CreateEvent/></PrivateRouterUser>} />
   <Route path="/login" element={<Login />} />
   <Route  path="/admin" element={<AdminPage />} />

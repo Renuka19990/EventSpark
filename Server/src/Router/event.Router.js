@@ -15,7 +15,7 @@ eventRoute.post('/addevents',auth,access("user"), addEvent);
 
 // Routes for getting particular user's events and particular event
 eventRoute.get('/events/user/:id',auth,access("user","admin"), eventData);
-eventRoute.get('/events/:id',auth,access("user"), event);
+eventRoute.get('/events/:id', event);
 
 // Routes for updating and deleting events
 eventRoute.patch('/events/:id',auth,access("user"), updateEvent);

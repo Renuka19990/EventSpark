@@ -344,7 +344,7 @@ const UserList = () => {
 
   const fetchUsers = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:8080/admin/users`, {
+      const { data } = await axios.get(`https://eventspark-ldbp.onrender.com/admin/users`, {
         params: { page, limit, search,minAge, maxAge, sort },
         headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
       });
@@ -363,7 +363,7 @@ const UserList = () => {
 
   const handleDeleteUser = async (userID) => {
     try {
-      await axios.delete(`http://localhost:8080/admin/users/${userID}`, {
+      await axios.delete(`https://eventspark-ldbp.onrender.com/admin/users/${userID}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
       });
       setUsers(users.filter(user => user.userID !== userID));
@@ -391,7 +391,7 @@ const UserList = () => {
 
   const handleSaveUser = async () => {
     const method = currentUser.userID ? 'patch' : 'post';
-    const url = currentUser.userID ? `http://localhost:8080/admin/users/${currentUser.userID}` : `http://localhost:8080/admin/users`;
+    const url = currentUser.userID ? `https://eventspark-ldbp.onrender.com/admin/users/${currentUser.userID}` : `http://localhost:8080/admin/users`;
     try {
       await axios[method](url, currentUser, {
         headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }

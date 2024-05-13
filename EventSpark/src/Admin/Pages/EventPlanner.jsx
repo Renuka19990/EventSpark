@@ -57,7 +57,7 @@ const EventPlanner = () => {
       // const token = localStorage.getItem('token');
 
 
-      const { data } = await axios.get(`http://localhost:8080/admin/users`, {
+      const { data } = await axios.get(`https://eventspark-ldbp.onrender.com/admin/users`, {
         params: { page, limit, search, minAge, maxAge, sort },
         headers: {
          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -87,7 +87,7 @@ const EventPlanner = () => {
 //
   const handleDeleteUser = async (userID) => {
     try {
-      await axios.delete(`http://localhost:8080/admin/users/${userID}`);
+      await axios.delete(`https://eventspark-ldbp.onrender.com/admin/users/${userID}`);
       setUsers(users.filter(user => user.userID !== userID));
       toast({
         title: 'User Deleted',

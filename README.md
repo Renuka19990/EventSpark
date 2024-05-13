@@ -1,4 +1,4 @@
-# HomeChef
+# EventSpark
 
 ## Introduction
 The EventSpark website is a comprehensive platform designed to simplify event planning and management. It allows users to book events, create their own events, and offers a responsive layout for seamless access across various devices.

@@ -149,8 +149,9 @@ const DesktopNav = () => {
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
               <Link
+                to={navItem.href}
                 p={2}
-                href={navItem.href ?? "#"}
+                // href={navItem.href}
                 fontSize={"sm"}
                 fontWeight={500}
                 color={linkColor}

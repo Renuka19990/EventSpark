@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Flex,
@@ -44,6 +44,7 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const toastShow = handleLogin(loggingData);
+    console.log(LoggedIn.isAdmin);
     toast.promise(toastShow, {
       success: {
         title: "Login Successful",
@@ -52,13 +53,16 @@ export const Login = () => {
       error: { title: "Login Failed", description: "Wrong Credential" },
       loading: { title: "Promise pending", description: "Please wait" },
     });
-
-    if(LoggedIn.isAdmin==="admin"){
-      navigate("/admin")
-    }else{
-        navigate("/")
-    }
+    console.log(LoggedIn.isAdmin);
+    // if(LoggedIn.isAdmin==="admin"){
+    // console.log(LoggedIn.isAdmin)
+    //   navigate("/admin/dashboard")
+    // }else{
+      console.log(LoggedIn.isAdmin=="admin")
+      {LoggedIn.isAdmin==="admin"?navigate("/"):navigate("/admin")}
+    // }
   };
+
 
 
   const handleChange = (e) => {

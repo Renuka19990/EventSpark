@@ -56,13 +56,12 @@ function Dashboard() {
   const toast = useToast();
 //
   useEffect(() => {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTUyNTUyMiwiZXhwIjoxNzE1NTI5MTIyfQ.1ySV6Ndcm8z8AXmiQThuwIBXN0CNC_cfrydThxHCId4"; // Ensure token is retrieved securely and correctly
     Promise.all([
       axios.get(`${API_URL}/admin/users`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
       }),
       axios.get(`${API_URL}/events`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
       })
     ]).then(([usersResponse, eventsResponse]) => {
       setUsers(usersResponse.data.users);

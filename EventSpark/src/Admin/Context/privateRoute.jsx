@@ -7,7 +7,7 @@ export const PrivateRouter=({children})=>{
     return (
        <>
        {
-        LoggedIn.isAuth&&LoggedIn.isAdmin=="admin"?children: LoggedIn.isAuth?<Navigate to="/" />:<Navigate to="/login" />
+        LoggedIn.isAuth&&LoggedIn.isAdmin!=="admin"?children: LoggedIn.isAuth?<Navigate to="/" />:<Navigate to="/login" />
       }
        </>
     )

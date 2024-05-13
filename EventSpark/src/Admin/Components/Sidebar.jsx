@@ -25,11 +25,11 @@ import {
 import TopNavBar from './TopNavbar';
 
 const LinkItems = [
-    { name: 'Dashboard', icon: FiHome, to: '/admin/dashboard' },
-    { name: 'EventPlanner', icon: FiUserPlus, to: '/admin/eventPlanner' },
-    { name: 'Events', icon: FiTrendingUp, to: '/admin/events' },
-    { name: 'Users', icon: FiUser, to: '/admin/users' },
-    { name: 'Settings', icon: FiSettings, to: '/admin/settings' },
+    { name: 'Dashboard', icon: FiHome, to: '/dashboard' },
+    { name: 'EventPlanner', icon: FiUserPlus, to: '/eventPlanner' },
+    { name: 'Events', icon: FiTrendingUp, to: '/eventsdetail' },
+    { name: 'Users', icon: FiUser, to: '/users' },
+    { name: 'Settings', icon: FiSettings, to: '/settings' },
 
   ];
   

@@ -3,7 +3,6 @@ const jwt=require("jsonwebtoken");
 const { BlacklistModel } = require("../Model/blacklist.model");
 
 const auth=async(req,res,next)=>{
-    console.log("tc")
    const token=req.headers["authorization"].split(" ")[1];
    if(!token){
     return res.status(401).json({msg:"token is not provided"});
@@ -18,7 +17,6 @@ const auth=async(req,res,next)=>{
         req.userID=decoded.userID;
         req.role=decoded.role;
         req.username=decoded.username;
-        console.log("tc3")
         next();
     }
    })

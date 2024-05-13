@@ -64,16 +64,16 @@ The development focused on creating an intuitive and secure platform that emphas
 ![Navbar](EventSpark/public/Navbar.png)
 
 # SignIn / SignUp
-![SignIn/SignUp](EventSpark\EventSpark\public\LoginPage.png)
+![SignIn/SignUp](EventSpark/public/MidSection.pngg)
 
 # Mid-Section / Carousel
-![Carousel](EventSpark\EventSpark\public\123.png)
+![Carousel](EventSpark\public\123.png)
 
 # Profile 
-![Profile](EventSpark\EventSpark\public\MidSection.png)
+![Profile](EventSpark\public\MidSection.png)
 
 # Footer
-![Footer](EventSpark\EventSpark\public\Footer.png)
+![Footer](EventSpark\public\Footer.png)
 
 
 

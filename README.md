@@ -39,9 +39,10 @@ EventSpark/<br>
 
 
 ## Deplolyed App
-Frontend: 
+Frontend:https://eventspark.netlify.app/ 
 
-## Video Walkthrough of the project
+## Video Walkthrough of the project:
+https://youtu.be/fEFdT0dGB2M
 
 
 ## Features

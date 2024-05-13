@@ -5,7 +5,7 @@ const AuthContext = createContext();
 const userRes = {
   isAuth: false,
   token: "",
-  isAdmin: false,
+  isAdmin: "",
 };
 
 export const useAuth = () => useContext(AuthContext);
@@ -24,14 +24,15 @@ export const AuthProvider = ({ children }) => {
         });
         // setAuth(res.data.isAuth);
         if (res) {
+          console.log(res);
           setLoggedIn({
             isAuth: true,
-            token: res.data.accessToken,
-            isAdmin: res.data.isAdmin,
+            token: res.data.token,
+            isAdmin: res.data.role,
           });
         }
         // console.log(res.data.accessToken);
-        localStorage.setItem("accessToken", res.data.accessToken);
+        localStorage.setItem("accessToken", res.data.token);
         resolve();
       } catch (error) {
         console.log(error);
@@ -39,6 +40,7 @@ export const AuthProvider = ({ children }) => {
       }
     });
   };
+  console.log(LoggedIn);
 
   const handleSignUp = async (obj) => {
     try {

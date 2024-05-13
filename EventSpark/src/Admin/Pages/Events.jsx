@@ -25,11 +25,11 @@ function App() {
 
   const fetchEvents = async () => {
     try {
-      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTUyNTUyMiwiZXhwIjoxNzE1NTI5MTIyfQ.1ySV6Ndcm8z8AXmiQThuwIBXN0CNC_cfrydThxHCId4"; // Replace with your actual token
       const { data } = await axios.get(`${API_URL}/events`, {
         params: { page, ...filters },
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
       });
+      
       setEvents(data.events);
       setTotalPages(data.totalPages);
     } catch (error) {
@@ -45,9 +45,8 @@ function App() {
 
   const deleteEvent = async (eventId) => {
     try {
-      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTUyNTUyMiwiZXhwIjoxNzE1NTI5MTIyfQ.1ySV6Ndcm8z8AXmiQThuwIBXN0CNC_cfrydThxHCId4"; // Repeat usage, ensure security practices
       await axios.delete(`${API_URL}/events/${eventId}`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
       });
       setEvents(events.filter(event => event.eventId !== eventId));
       toast({

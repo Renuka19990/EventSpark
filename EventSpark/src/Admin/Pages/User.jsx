@@ -345,7 +345,7 @@ const UserList = () => {
     try {
       const { data } = await axios.get(`http://localhost:8080/admin/users`, {
         params: { page, limit, search,minAge, maxAge, sort },
-        headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTUyNTUyMiwiZXhwIjoxNzE1NTI5MTIyfQ.1ySV6Ndcm8z8AXmiQThuwIBXN0CNC_cfrydThxHCId4` }
+        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
       });
       setUsers(data.users);
       setTotalPages(data.totalPages);
@@ -363,7 +363,7 @@ const UserList = () => {
   const handleDeleteUser = async (userID) => {
     try {
       await axios.delete(`http://localhost:8080/admin/users/${userID}`, {
-        headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTUyNTUyMiwiZXhwIjoxNzE1NTI5MTIyfQ.1ySV6Ndcm8z8AXmiQThuwIBXN0CNC_cfrydThxHCId4` }
+        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
       });
       setUsers(users.filter(user => user.userID !== userID));
       toast({
@@ -393,8 +393,9 @@ const UserList = () => {
     const url = currentUser.userID ? `http://localhost:8080/admin/users/${currentUser.userID}` : `http://localhost:8080/admin/users`;
     try {
       await axios[method](url, currentUser, {
-        headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmppdkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VySUQiOjM3LCJ1c2VybmFtZSI6IlJhbmppdiIsImlhdCI6MTcxNTUyNTUyMiwiZXhwIjoxNzE1NTI5MTIyfQ.1ySV6Ndcm8z8AXmiQThuwIBXN0CNC_cfrydThxHCId4` }
+        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
       });
+      
       fetchUsers();  // Refetch users to reflect changes
       toast({
         title: 'User added successfully',

@@ -3,11 +3,19 @@ import { Flex, Button, useColorModeValue, Image, Input } from '@chakra-ui/react'
 import { useAuth } from '../Context/ThemeContext';
 import logo from '../images/dark_bg.png'
 import Sidebar from './Sidebar';
+import { useNavigate } from 'react-router-dom';
  // Make sure to import the useAuth 
 
 const TopNavBar = () => {
-  const { isLoggedIn, login, logout } = useAuth();
+  const { isLoggedIn, login, logout,handleLogout } = useAuth();
+  const navigate=useNavigate();
 
+
+  const handleClick=()=>{
+    handleLogout();
+    navigate("/")
+
+  }
   return (
     <>   
 
@@ -35,7 +43,7 @@ const TopNavBar = () => {
     />
   <Button>Search</Button>
   {isLoggedIn ? (
-      <Button onClick={logout}>Logout</Button>
+      <Button onClick={handleClick}>Logout</Button>
     ) : (
       <Button onClick={login}>Login</Button>
     )}

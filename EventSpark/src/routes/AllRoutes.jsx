@@ -13,36 +13,37 @@ import { EventPage } from "../Eventpage/page"
 import { PrivateRouter, PrivateRouterUser } from "../Admin/Context/privateRoute"
 
 const AllRoutes = () => {
-  const hideNavbarPaths = [
-    "/admin",
-    "/admin/dashboard",
-    "/admin/eventPlanner",
-    "/admin/events",
-    "/admin/users",
+  // const hideNavbarPaths = [
+  //   "/admin",
+  //   "/admin/dashboard",
+  //   "/admin/eventPlanner",
+  //   "/admin/events",
+  //   "/admin/users",
   
-  ];
-  const location = useLocation();
-  console.log(location);
-  const isAdminRoute = hideNavbarPaths.includes(location.pathname);
+  // ];
+  // const location = useLocation();
+  // console.log(location);
+  // const isAdminRoute = hideNavbarPaths.includes(location.pathname);
   return (
-    <div>
-     {!isAdminRoute}
-     <Routes>
+  <Routes>
   <Route path="/" element={<HomePage />} />
   <Route path="/events" element={<EventPage />} />
   <Route path="/createevents" element={<PrivateRouter><CreateEvent/></PrivateRouter>} />
   <Route path="/login" element={<Login />} />
-  <Route path="/admin" element={<PrivateRouterUser><AdminPage /></PrivateRouterUser>}>
-    <Route index element={<Dashboard />} />
-    <Route path="dashboard" element={<Dashboard />} />
-    {/* <Route path="events" element={<PrivateRouterUser><Events /></PrivateRouterUser>} /> */}
-    <Route path="users" element={<User />} />
-    <Route path="eventPlanner" element={<EventPlanner />} />
-  </Route>
+  <Route  path="/admin" element={<AdminPage />} />
+  <Route path="/dashboard" element={<Dashboard />} /> 
+  <Route path="/users" element={<User />} />
+  <Route path="/eventPlanner" element={<EventPlanner />} /> 
+  <Route path="eventsdetail" element={<Events />} /> 
+{/* <Route path="/admin" element={<PrivateRouterUser><AdminPage /></PrivateRouterUser>}>
+ <Route index element={<Dashboard />} />
+    <Route path="/dashboard" element={<Dashboard />} /> 
+ <Route path="events" element={<PrivateRouterUser><Events /></PrivateRouterUser>} /> 
+    <Route path="/users" element={<User />} />
+    <Route path="/eventPlanner" element={<EventPlanner />} /> 
+ </Route> */}
 </Routes>
 
-       { !isAdminRoute}
-    </div>
   )
 }
 

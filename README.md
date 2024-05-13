@@ -1,5 +1,4 @@
-# EventSpark
-
+# HomeChef
 
 ## Introduction
 The EventSpark website is a comprehensive platform designed to simplify event planning and management. It allows users to book events, create their own events, and offers a responsive layout for seamless access across various devices.
@@ -40,13 +39,9 @@ EventSpark/<br>
 
 
 ## Deplolyed App
-Frontend:https://eventspark.netlify.app/
-## Video Walkthrough of the project
-https://youtu.be/fEFdT0dGB2M
+Frontend: 
 
-Admin Credentials:
-Email:ranjiv@gmail.com
-Password:1234
+## Video Walkthrough of the project
 
 
 ## Features
@@ -66,19 +61,20 @@ Password:1234
 The development focused on creating an intuitive and secure platform that emphasizes community building among food enthusiasts. Assumptions include a high engagement rate based on quality content and user-friendly features.
 
 # Navbar
-![]()
+![Navbar](EventSpark\EventSpark\public\Navbar.png)
 
 # SignIn / SignUp
-![]()
+![SignIn/SignUp](EventSpark\EventSpark\public\LoginPage.png)
 
 # Mid-Section / Carousel
-![]()
+![Carousel](EventSpark\EventSpark\public\123.png)
 
 # Profile 
-![]()
+![Profile](EventSpark\EventSpark\public\MidSection.png)
 
 # Footer
-![]()
+![Footer](EventSpark\EventSpark\public\Footer.png)
+
 
 
 ## Installation & Getting Started

@@ -9,7 +9,6 @@ import {
   Stack,
   Collapse,
   Icon,
-  Link,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -25,10 +24,12 @@ import {
   ChevronRightIcon,
   // SearchIcon,
 } from "@chakra-ui/icons";
+import { useAuth } from "../Admin/Context/ThemeContext";
+import {Link} from "react-router-dom"
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
-
+  const {handleLogout,LoggedIn } =useAuth();
   return (
     <Box position="fixed" w="100%" zIndex="999" top="0">
       <Flex
@@ -82,32 +83,50 @@ export default function Navbar() {
           direction={"row"}
           spacing={6}
         >
-          <Button
-            _hover={{
-              color: "gray.600",
-            }}
-            ml={7}
-            as={"a"}
-            fontSize={"sm"}
-            fontWeight={700}
-            variant={"link"}
-            href={"#"}
-          >
-            Log In
-          </Button>
-          <Button
-            _hover={{
-              color: "gray.600",
-            }}
-            ml={7}
-            as={"a"}
-            fontSize={"sm"}
-            fontWeight={700}
-            variant={"link"}
-            href={"#"}
-          >
-            Sign Up
-          </Button>
+          {LoggedIn.isAuth ? (
+  <Link to="/login">
+    <Button
+      _hover={{
+        color: "gray.600",
+      }}
+      ml={7}
+      fontSize={"sm"}
+      fontWeight={700}
+      variant={"link"}
+      onClick={handleLogout}
+    >
+      Log Out
+    </Button>
+  </Link>
+) : (
+  <>
+  <Link to="/login">
+    <Button
+      _hover={{
+        color: "gray.600",
+      }}
+      ml={7}
+      fontSize={"sm"}
+      fontWeight={700}
+      variant={"link"}
+    >
+      Log In
+    </Button>
+    </Link>
+    <Button
+      _hover={{
+        color: "gray.600",
+      }}
+      ml={7}
+      fontSize={"sm"}
+      fontWeight={700}
+      variant={"link"}
+    >
+      Sign Up
+    </Button>
+  </>
+)}
+
         </Stack>
       </Flex>
 

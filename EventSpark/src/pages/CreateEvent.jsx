@@ -13,6 +13,8 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/react";
 import Carousel from "../components/Carousels";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 const CreateEvent = () => {
   const toast = useToast();
   const [eventData, setEventData] = useState({
@@ -109,6 +111,7 @@ const CreateEvent = () => {
 
   return (
     <>
+    <Navbar/>
       <Carousel />
       <div className="container mx-auto mt-12 mb-11 p-4 rounded-lg shadow-md">
         <div
@@ -268,6 +271,7 @@ const CreateEvent = () => {
           </form>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

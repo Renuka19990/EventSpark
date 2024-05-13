@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-
+import axios from "axios"
 const AuthContext = createContext();
 
 const userRes = {
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
             isAdmin: res.data.isAdmin,
           });
         }
-        console.log(res.data.accessToken);
+        // console.log(res.data.accessToken);
         localStorage.setItem("accessToken", res.data.accessToken);
         resolve();
       } catch (error) {

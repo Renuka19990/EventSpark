@@ -42,12 +42,12 @@ const TrendingEvents = () => {
   }, []);
 
   return (
-    <Box p={isSmallerScreen?4:32} className="container mx-auto">
+    <Box p={isSmallerScreen?4:32} pt={20} className="container mx-auto">
       <Heading as="h1" size="xl"  color="blue.400" className="text-center ">
         Trending Events 🎉
       </Heading>
 
-      <SimpleGrid columns={[1, null, isSmallerScreen ? 2 : 3]} spacing={4} className="mt-16">
+      <SimpleGrid columns={[1, null, isSmallerScreen ? 2 : 3]} spacing={4} className="mt-12">
         {isLoading ? (
           // Display skeletons while loading
           Array.from({ length: 9 }).map((_, index) => (

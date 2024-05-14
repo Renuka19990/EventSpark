@@ -43,6 +43,10 @@ Frontend: https://eventspark.netlify.app/  </br>
 Backend:  https://eventspark-ldbp.onrender.com/
 
 
+## Video Walkthrough of the project
+[![VIDEO](https://github.com/Renuka19990/EventSpark/assets/154539617/83621b9e-fb59-492a-9ecb-13082c23aa5b)](https://www.youtube.com/watch?v=kzgs5bzcYe0)
+
+
 
 ## Video Walkthrough of the project:
 https://youtu.be/fEFdT0dGB2M

@@ -1,7 +1,7 @@
 # EventSpark
 
 ## Introduction
-The EventSpark website is a comprehensive platform designed to simplify event planning and management. It allows users to book events, create their own events, and offers a responsive layout for seamless access across various devices.
+The EventSpark website is a comprehensive platform that simplifies event planning and management. It allows users to book events, create their own events, and offers a responsive layout for seamless access across various devices.
 
 ## Project Type
 Fullstack ( MERN )
@@ -38,15 +38,21 @@ EventSpark/<br>
 
 
 
-## Deplolyed App
-Frontend:https://eventspark.netlify.app/ 
+## Deployed App
+Frontend: https://eventspark.netlify.app/  </br>
+Backend:  https://eventspark-ldbp.onrender.com/
+
+
 
 ## Video Walkthrough of the project:
 https://youtu.be/fEFdT0dGB2M
 
-## Admin Credentials:
-Email:ranjiv@gmail.com
-Password:1234
+## Credentials
+In order to be able to access the Admin Dashboard, enter these credentials in the Login Page :
+```bash
+Email: ranjiv@gmail.com
+Password: 1234
+```
 
 ## Features
 - Secure user registration and authentication
@@ -105,7 +111,7 @@ Renuka Jagrwal(Team lead) fw29_183
 <br>
 Aman choube ft30_113
 <br>
-Anuj singh ft30_043
+Anuj Kshatriya ft30_043
 
 
 

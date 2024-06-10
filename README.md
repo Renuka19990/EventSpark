@@ -57,6 +57,9 @@ In order to be able to access the Admin Dashboard, enter these credentials in th
 Email: ranjiv@gmail.com
 Password: 1234
 ```
+normal user:
+Email:smith@gmail.com
+pass:1234;
 
 ## Features
 - Secure user registration and authentication
